@@ -10,7 +10,7 @@
   const tileHeight = canvasHeight / rowCount;
   const tileCount = colCount * rowCount;
   function generateRandomOpacity() {
-    return Math.random() * 0.5;
+    return Math.random() * 0.3;
   }
   function generateGridTiles(): GridSquare[] {
     return times(tileCount, (i: number) => {
