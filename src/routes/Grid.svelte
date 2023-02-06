@@ -9,9 +9,11 @@
   let gridTiles: GridSquare[] = [];
   const canvasWidth = 100;
   const canvasHeight = canvasWidth;
-  const tileWidth = 10;
-  const tileHeight = tileWidth;
-  const tileCount = (canvasWidth * canvasHeight) / tileWidth / tileHeight;
+  const colCount = 10;
+  const rowCount = 10;
+  const tileWidth = canvasWidth / colCount;
+  const tileHeight = canvasHeight / rowCount;
+  const tileCount = colCount * rowCount;
   function generateRandomOpacity() {
     return Math.random() * 0.5;
   }
