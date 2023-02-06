@@ -1,11 +1,6 @@
 <script lang="ts">
   import { times } from 'lodash-es';
-  interface GridSquare {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-  }
+  import type { GridSquare } from './types';
   let gridTiles: GridSquare[] = [];
   const canvasWidth = 100;
   const canvasHeight = canvasWidth;
