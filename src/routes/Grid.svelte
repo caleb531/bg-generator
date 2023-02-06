@@ -2,6 +2,7 @@
   import { browser } from '$app/environment';
   import { times } from 'lodash-es';
   import type { GridSquare } from './types';
+  import { generateRandomOpacityUniform } from './utils';
   let gridTiles: GridSquare[] = [];
   const canvasWidth = 100;
   const canvasHeight = canvasWidth;
@@ -10,9 +11,6 @@
   const tileWidth = canvasWidth / colCount;
   const tileHeight = canvasHeight / rowCount;
   const tileCount = colCount * rowCount;
-  function generateRandomOpacity() {
-    return Math.random() * 0.3;
-  }
   function generateGridTiles(): GridSquare[] {
     return times(tileCount, (i: number) => {
       return {
@@ -20,7 +18,7 @@
         y: Math.floor(i / colCount) * tileHeight,
         width: tileWidth,
         height: tileHeight,
-        fill: browser ? `rgba(0, 0, 0, ${generateRandomOpacity()})` : 'transparent'
+        fill: browser ? `rgba(0, 0, 0, ${generateRandomOpacityUniform()})` : 'transparent'
       };
     });
   }
