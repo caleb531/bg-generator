@@ -1,0 +1,21 @@
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0 40px;
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+  background-color: #222;
+  text-align: center;
+  color: #fff;
+}
+h1 {
+  margin: 20px 0;
+}
+a {
+  color: inherit;
+}
+
+.image-canvas {
+  width: 100%;
+  max-height: calc(100vh - 120px);
+}

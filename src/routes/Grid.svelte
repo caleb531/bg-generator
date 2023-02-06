@@ -26,16 +26,9 @@
   $: gridTiles = generateGridTiles();
 </script>
 
-<svg viewBox="0 0 {canvasWidth} {canvasHeight}" width="100%">
+<svg viewBox="0 0 {canvasWidth} {canvasHeight}" width="100%" class="image-canvas">
   <rect x="0" y="0" width="100%" height="100%" fill="#068" />
   {#each gridTiles as gridTile}
     <rect {...gridTile} />
   {/each}
 </svg>
-
-<style>
-  svg {
-    width: 100%;
-    max-height: calc(100vh - 120px);
-  }
-</style>
