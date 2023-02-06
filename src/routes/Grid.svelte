@@ -20,8 +20,8 @@
   function generateGridTiles(): GridSquare[] {
     return times(tileCount, (i: number) => {
       return {
-        x: (i * tileWidth) % canvasWidth,
-        y: Math.floor(i / tileHeight) * tileHeight,
+        x: Math.floor(i % colCount) * tileWidth,
+        y: Math.floor(i / colCount) * tileHeight,
         width: tileWidth,
         height: tileHeight,
         fill: `rgba(0, 0, 0, ${generateRandomOpacity()})`
