@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { browser } from '$app/environment';
   import { times } from 'lodash-es';
   import type { GridSquare } from './types';
   let gridTiles: GridSquare[] = [];
@@ -19,7 +20,7 @@
         y: Math.floor(i / colCount) * tileHeight,
         width: tileWidth,
         height: tileHeight,
-        fill: `rgba(0, 0, 0, ${generateRandomOpacity()})`
+        fill: browser ? `rgba(0, 0, 0, ${generateRandomOpacity()})` : 'transparent'
       };
     });
   }
