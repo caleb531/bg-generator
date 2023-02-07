@@ -24,6 +24,8 @@
       bind:value={$grid.columnCount}
     />
     <GridNumberControl id="row_count" label="Rows" min={1} max={50} bind:value={$grid.rowCount} />
+  </div>
+  <div class="grid-controls-group">
     <GridNumberControl id="width" label="Width" min={1} max={500} bind:value={$grid.width} />
     <GridNumberControl id="height" label="Height" min={1} max={500} bind:value={$grid.height} />
   </div>

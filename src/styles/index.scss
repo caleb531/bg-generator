@@ -8,20 +8,23 @@ body {
   text-align: center;
   color: #fff;
 }
-h1 {
-  margin: 20px 0;
-}
 a {
   color: inherit;
 }
 
 .image-canvas {
-  width: 100%;
-  max-height: calc(100vh - 170px);
+  max-height: calc(100vh - 210px);
 }
 
 .app-header {
   margin-bottom: 10px;
+}
+.app-heading {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 6px 12px;
+  font-weight: 600;
+  font-size: 16px;
 }
 
 input[type='text'],
@@ -30,6 +33,34 @@ input[type='search'] {
   border-width: 0;
   border-radius: 3px;
   padding: 4px 6px;
+  font-family: inherit;
+}
+
+button {
+  border-width: 0;
+  border-radius: 3px;
+  background-color: #fff;
+  font-family: inherit;
+  font-weight: 600;
+  padding: 6px 12px;
+  &:hover:active {
+    background-color: #ccc;
+  }
+}
+
+input,
+button {
+  &:focus-visible {
+    outline-width: 0;
+    box-shadow: 0 0 0 2px #36c, 0 0 0 4px #3cf;
+  }
+}
+
+.grid-controls-group {
+  display: flex;
+  justify-content: center;
+  gap: 0 10px;
+  margin-bottom: 10px;
 }
 
 .grid-control {
@@ -45,5 +76,8 @@ input[type='search'] {
   }
   input[type='number'] {
     width: 50px;
+  }
+  input[type='range'] {
+    width: 100px;
   }
 }

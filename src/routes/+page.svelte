@@ -9,7 +9,7 @@
 </svelte:head>
 
 <header class="app-header">
-  <h1>BG Generator</h1>
+  <h1 class="app-heading">BG Generator</h1>
   <GridControls />
 </header>
 

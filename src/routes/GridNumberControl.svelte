@@ -10,11 +10,12 @@
 <div class="grid-control">
   <div class="grid-control-row">
     <label for="grid-controls-{id}">{label}</label>
+    <span class="grid-control-value">{value}</span>
   </div>
   <div class="grid-control-row">
     <input
       id="grid-controls-{id}"
-      type="number"
+      type="range"
       name={id}
       {min}
       {max}
