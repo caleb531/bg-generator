@@ -4,7 +4,7 @@
   import GridControls from './GridControls.svelte';
 </script>
 
-<h1>Background Generator</h1>
+<h1>BG Generator</h1>
 
 <GridControls />
 <Grid />
