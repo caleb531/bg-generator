@@ -8,7 +8,9 @@
   <title>BG Generator | Caleb Evans</title>
 </svelte:head>
 
-<h1>BG Generator</h1>
+<header class="app-header">
+  <h1>BG Generator</h1>
+  <GridControls />
+</header>
 
-<GridControls />
 <Grid />
