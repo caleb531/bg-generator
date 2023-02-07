@@ -1,4 +1,4 @@
-export interface GridSquare {
+export interface GridTile {
   x: number;
   y: number;
   width: number;
