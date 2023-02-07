@@ -4,6 +4,10 @@
   import GridControls from './GridControls.svelte';
 </script>
 
+<svelte:head>
+  <title>BG Generator | Caleb Evans</title>
+</svelte:head>
+
 <h1>BG Generator</h1>
 
 <GridControls />
