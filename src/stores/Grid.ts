@@ -1,4 +1,10 @@
-import { get, writable } from 'svelte/store';
+import { times } from 'lodash-es';
+import { derived, get, writable } from 'svelte/store';
+import { generateRandomFillColor } from '../routes/utils';
+
+export interface GridTile {
+  fill: string;
+}
 
 export interface Grid {
   fullScreen: boolean;
@@ -6,9 +12,34 @@ export interface Grid {
   rowCount: number;
   width: number;
   height: number;
+  tiles: GridTile[];
 }
 
-export const defaultGrid = {
+export function generateGridTiles($grid: Omit<Grid, 'tiles'>): Grid['tiles'] {
+  const tileCount = $grid.columnCount * $grid.rowCount;
+  return times(tileCount, () => {
+    return {
+      fill: generateRandomFillColor()
+    };
+  });
+}
+export const regenerateGridTiles = generateGridTiles;
+
+export function resizeGrid($grid: Grid): Grid {
+  const tileCount = $grid.columnCount * $grid.rowCount;
+  return {
+    ...$grid,
+    tiles: times(
+      tileCount,
+      (i) =>
+        $grid.tiles[i] || {
+          fill: generateRandomFillColor()
+        }
+    )
+  };
+}
+
+export const defaultGrid: Omit<Grid, 'tiles'> = {
   fullScreen: false,
   columnCount: 10,
   rowCount: 10,
@@ -20,12 +51,13 @@ export const defaultGrid = {
 export function restoreGrid(): Grid {
   if (typeof localStorage === 'undefined') {
     return {
-      ...defaultGrid
+      ...defaultGrid,
+      tiles: generateGridTiles({ ...defaultGrid })
     };
   }
   const rawValue = localStorage.getItem('bg-generator:grid');
   if (rawValue === null) {
-    return defaultGrid;
+    return { ...defaultGrid, tiles: generateGridTiles({ ...defaultGrid }) };
   }
   return {
     ...defaultGrid,
@@ -35,6 +67,12 @@ export function restoreGrid(): Grid {
 
 export const grid = writable(restoreGrid());
 
+// Watch for changes to individual grid properties
+export const gridColumnCount = derived(grid, ($grid) => $grid.columnCount);
+export const gridRowCount = derived(grid, ($grid) => $grid.rowCount);
+gridColumnCount.subscribe(() => grid.update(resizeGrid));
+gridRowCount.subscribe(() => grid.update(resizeGrid));
+
 // Persist user's grid data to local browser storage
 export function saveGrid() {
   if (typeof localStorage === 'undefined') {
@@ -43,3 +81,5 @@ export function saveGrid() {
   const gridStoreToSave: Grid = get(grid);
   localStorage.setItem('bg-generator:grid', JSON.stringify(gridStoreToSave));
 }
+
+saveGrid();
