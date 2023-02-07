@@ -39,12 +39,16 @@ input[type='search'] {
 button {
   border-width: 0;
   border-radius: 3px;
-  background-color: #fff;
+  background-color: #693;
   font-family: inherit;
   font-weight: 600;
   padding: 6px 12px;
+  color: #fff;
+  &.warning {
+    background-color: #c63;
+  }
   &:hover:active {
-    background-color: #ccc;
+    filter: brightness(75%);
   }
 }
 

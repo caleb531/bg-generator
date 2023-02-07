@@ -12,7 +12,7 @@
 
 <form class="grid-controls" on:submit|preventDefault>
   <div class="grid-controls-group">
-    <button type="button" on:click={randomizeGrid}>Randomize Grid</button>
+    <button type="button" class="warning" on:click={randomizeGrid}>Randomize Grid</button>
     <button type="button" on:click={toggleFullScreen}>Toggle Fullscreen</button>
   </div>
   <div class="grid-controls-group">
