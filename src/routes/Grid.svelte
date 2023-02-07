@@ -1,11 +1,11 @@
 <script lang="ts">
   import { browser } from '$app/environment';
   import { times } from 'lodash-es';
-  import { grid } from '../stores/Grid';
+  import { grid, type Grid } from '../stores/Grid';
   import type { GridTile } from './types';
   import { generateRandomOpacityUniform } from './utils';
   let gridTiles: GridTile[] = [];
-  function generateGridTiles(): GridTile[] {
+  function generateGridTiles($grid: Grid): GridTile[] {
     const tileWidth = $grid.width / $grid.columnCount;
     const tileHeight = $grid.height / $grid.rowCount;
     const tileCount = $grid.columnCount * $grid.rowCount;
@@ -19,7 +19,7 @@
       };
     });
   }
-  $: gridTiles = generateGridTiles();
+  $: gridTiles = generateGridTiles($grid);
 </script>
 
 <svg viewBox="0 0 {$grid.width} {$grid.height}" class="image-canvas">

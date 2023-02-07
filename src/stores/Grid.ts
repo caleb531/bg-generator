@@ -23,7 +23,7 @@ export function restoreGrid(): Grid {
       ...defaultGrid
     };
   }
-  const rawValue = localStorage.getItem('counters-store');
+  const rawValue = localStorage.getItem('bg-generator:grid');
   if (rawValue === null) {
     return defaultGrid;
   }

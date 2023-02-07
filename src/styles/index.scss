@@ -19,3 +19,31 @@ a {
   width: 100%;
   max-height: calc(100vh - 120px);
 }
+
+.grid-controls {
+  margin-bottom: 10px;
+}
+
+input[type='text'],
+input[type='number'],
+input[type='search'] {
+  border-width: 0;
+  border-radius: 3px;
+  padding: 4px 6px;
+}
+
+.grid-control {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  &:not(:last-of-type) {
+    padding-right: 20px;
+  }
+  label {
+    font-size: 14px;
+    color: #fff;
+  }
+  input[type='number'] {
+    width: 50px;
+  }
+}
