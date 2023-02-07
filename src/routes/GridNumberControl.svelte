@@ -3,6 +3,8 @@
   export let id: string;
   export let label: string;
   export let value: number;
+  export let min: number;
+  export let max: number;
 </script>
 
 <div class="grid-control">
@@ -14,8 +16,8 @@
       id="grid-controls-{id}"
       type="number"
       name={id}
-      min="1"
-      max="50"
+      {min}
+      {max}
       bind:value
       on:input={saveGrid}
     />
