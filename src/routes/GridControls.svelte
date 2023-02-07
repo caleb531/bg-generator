@@ -4,8 +4,6 @@
 </script>
 
 <form class="grid-controls" on:submit|preventDefault>
-  <!-- TODO -->
-
   <GridNumberControl
     id="column_count"
     label="Columns"
