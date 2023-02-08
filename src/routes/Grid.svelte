@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { tick } from 'svelte';
   import { grid, type Grid } from '../stores/Grid';
 
   let tileWidth: number;
@@ -11,8 +12,11 @@
 
   let svgElement: SVGElement;
   let svgMarkup = '';
-  function exportSvgToString($grid: Grid, svgElement: SVGElement) {
+  async function exportSvgToString($grid: Grid, svgElement: SVGElement) {
     if (svgElement && $grid.fullScreen) {
+      // Wait for SVG element to finish re-rendering before retrieving outerHTML
+      // (source: <https://svelte.dev/tutorial/tick>)
+      await tick();
       svgMarkup = svgElement.outerHTML;
     }
   }
