@@ -8,12 +8,25 @@
     tileHeight = $grid.height / $grid.rowCount;
   }
   $: recomputeConstants($grid);
+
+  let svgElement: SVGElement;
+  let svgMarkup = '';
+  function exportSvgToString($grid: Grid, svgElement: SVGElement) {
+    if (svgElement && $grid.fullScreen) {
+      svgMarkup = svgElement.outerHTML;
+    }
+  }
+  $: exportSvgToString($grid, svgElement);
 </script>
 
 <svg
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 {$grid.width} {$grid.height}"
   class="image-canvas"
   class:is-fullscreen={$grid.fullScreen}
+  preserveAspectRatio="none"
+  bind:this={svgElement}
 >
   <rect x="0" y="0" width="100%" height="100%" fill="#068" />
   {#each $grid.tiles as gridTile, i}
@@ -26,3 +39,11 @@
     />
   {/each}
 </svg>
+
+{#if $grid.fullScreen && svgMarkup}
+  <div
+    class="grid-full-screen"
+    style:background-size="{$grid.width}px {$grid.height}px"
+    style:background-image="url('data:image/svg+xml;base64,{window.btoa(svgMarkup)}')"
+  />
+{/if}

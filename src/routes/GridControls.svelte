@@ -3,6 +3,7 @@
   import GridNumberControl from './GridNumberControl.svelte';
   function toggleFullScreen() {
     $grid.fullScreen = !$grid.fullScreen;
+    saveGrid();
   }
   function randomizeGrid() {
     $grid.tiles = regenerateGridTiles($grid);
