@@ -1,5 +1,6 @@
 <script lang="ts">
   import { grid, regenerateGridTiles, saveGrid } from '../stores/Grid';
+  import GridColorControl from './GridColorControl.svelte';
   import GridNumberControl from './GridNumberControl.svelte';
   function toggleFullScreen() {
     $grid.fullScreen = !$grid.fullScreen;
@@ -29,5 +30,13 @@
   <div class="grid-controls-group">
     <GridNumberControl id="width" label="Width" min={1} max={500} bind:value={$grid.width} />
     <GridNumberControl id="height" label="Height" min={1} max={500} bind:value={$grid.height} />
+  </div>
+  <div class="grid-controls-group">
+    <div class="grid-controls-subgroup">
+      <GridColorControl id="bg_color" label="BG Color" bind:value={$grid.backgroundColor} />
+    </div>
+    <div class="grid-controls-subgroup">
+      <GridColorControl id="tile_color" label="Tile Color" bind:value={$grid.tileColor} />
+    </div>
   </div>
 </form>

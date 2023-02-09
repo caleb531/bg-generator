@@ -1,9 +1,9 @@
 import { times } from 'lodash-es';
 import { derived, get, writable } from 'svelte/store';
-import { generateRandomFillColor } from '../routes/utils';
+import { generateRandomOpacity } from '../routes/utils';
 
 export interface GridTile {
-  fill: string;
+  alpha: number;
 }
 
 export interface Grid {
@@ -13,13 +13,15 @@ export interface Grid {
   width: number;
   height: number;
   tiles: GridTile[];
+  backgroundColor: string;
+  tileColor: string;
 }
 
 export function generateGridTiles($grid: Omit<Grid, 'tiles'>): Grid['tiles'] {
   const tileCount = $grid.columnCount * $grid.rowCount;
   return times(tileCount, () => {
     return {
-      fill: generateRandomFillColor()
+      alpha: generateRandomOpacity()
     };
   });
 }
@@ -33,7 +35,7 @@ export function resizeGrid($grid: Grid): Grid {
       tileCount,
       (i) =>
         $grid.tiles[i] || {
-          fill: generateRandomFillColor()
+          alpha: generateRandomOpacity()
         }
     )
   };
@@ -44,7 +46,9 @@ export const defaultGrid: Omit<Grid, 'tiles'> = {
   columnCount: 10,
   rowCount: 10,
   width: 100,
-  height: 100
+  height: 100,
+  backgroundColor: '#006688',
+  tileColor: '#000000'
 };
 
 // Retrieve user's persisted grid data from local browser storage

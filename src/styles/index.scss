@@ -19,7 +19,7 @@ a {
 }
 
 .image-canvas {
-  max-height: calc(100vh - 240px);
+  max-height: calc(100vh - 300px);
   padding: 0 40px;
   box-sizing: content-box;
   &.is-fullscreen {
@@ -93,15 +93,15 @@ button {
   justify-content: center;
   gap: 0 10px;
   margin-bottom: 10px;
+  & > *:not(:last-of-type) {
+    padding-right: 20px;
+  }
 }
 
 .grid-control {
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
-  &:not(:last-of-type) {
-    padding-right: 20px;
-  }
   label {
     font-weight: 600;
     color: #fff;

@@ -3,8 +3,8 @@
   export let id: string;
   export let label: string;
   export let value: number;
-  export let min: number;
-  export let max: number;
+  export let min: number | undefined = 0;
+  export let max: number | undefined = undefined;
 </script>
 
 <div class="grid-control">

@@ -32,16 +32,18 @@
   preserveAspectRatio="none"
   bind:this={svgElement}
 >
-  <rect x="0" y="0" width="100%" height="100%" fill="#068" />
-  {#each $grid.tiles as gridTile, i}
-    <rect
-      x={Math.floor(i % $grid.columnCount) * tileWidth}
-      y={Math.floor(i / $grid.columnCount) * tileHeight}
-      width={tileWidth}
-      height={tileHeight}
-      fill={gridTile.fill}
-    />
-  {/each}
+  <rect x="0" y="0" width="100%" height="100%" fill={$grid.backgroundColor} />
+  <g fill={$grid.tileColor}>
+    {#each $grid.tiles as gridTile, i}
+      <rect
+        x={Math.floor(i % $grid.columnCount) * tileWidth}
+        y={Math.floor(i / $grid.columnCount) * tileHeight}
+        width={tileWidth}
+        height={tileHeight}
+        opacity={gridTile.alpha}
+      />
+    {/each}
+  </g>
 </svg>
 
 {#if $grid.fullScreen && svgMarkup}
