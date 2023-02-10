@@ -10,13 +10,23 @@
 <div class="grid-control">
   <div class="grid-control-row">
     <label for="grid-controls-{id}">{label}:</label>
-    <span class="grid-control-value">{value}</span>
+    <input
+      class="grid-control-value"
+      type="number"
+      inputmode="decimal"
+      pattern="[0-9]*"
+      name={id}
+      {min}
+      {max}
+      bind:value
+      on:input={saveGrid}
+    />
   </div>
   <div class="grid-control-row">
     <input
-      id="grid-controls-{id}"
+      class="grid-control-value-slider"
+      aria-label="Slider for {label}"
       type="range"
-      name={id}
       {min}
       {max}
       bind:value

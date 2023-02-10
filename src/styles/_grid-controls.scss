@@ -21,9 +21,23 @@
     font-size: 14px;
   }
   input[type='number'] {
-    width: 50px;
+    flex-grow: 0;
+    width: 40px;
+    padding: 1px 4px;
   }
   input[type='range'] {
     width: 100px;
   }
+}
+
+.grid-control-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.grid-control-value {
+  margin-left: 4px;
+  margin-right: 2px;
 }
