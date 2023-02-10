@@ -12,9 +12,14 @@
     saveGrid();
   }
   function getSvgMarkup() {
-    let svgMarkup = document.querySelector('.grid-canvas')?.outerHTML || '';
-    svgMarkup = svgMarkup.replace('<svg ', `<svg width="${$grid.width}" height="${$grid.height}" `);
-    return svgMarkup;
+    const svgElement = document.querySelector('.grid-canvas');
+    if (!svgElement) {
+      return '';
+    }
+    let clonedSvgElement = svgElement.cloneNode(true) as SVGElement;
+    clonedSvgElement.setAttribute('width', String($grid.width));
+    clonedSvgElement.setAttribute('height', String($grid.height));
+    return clonedSvgElement.outerHTML || '';
   }
   function exportSvg() {
     const svgMarkup = getSvgMarkup();
