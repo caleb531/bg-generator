@@ -26,6 +26,9 @@
     a.download = '';
     a.click();
   }
+  function importSvg() {
+    alert("doesn't work yet!");
+  }
 </script>
 
 <form class="grid-controls" on:submit|preventDefault>
@@ -35,6 +38,7 @@
   </div>
   <div class="grid-controls-group">
     <GridActionButton onAction={exportSvg}>Export SVG</GridActionButton>
+    <GridActionButton onAction={importSvg}>Import SVG</GridActionButton>
   </div>
   <div class="grid-controls-group">
     <GridNumberControl
