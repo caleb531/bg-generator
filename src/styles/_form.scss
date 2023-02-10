@@ -1,0 +1,32 @@
+input[type='text'],
+input[type='number'],
+input[type='search'] {
+  border-width: 0;
+  border-radius: 3px;
+  padding: 4px 6px;
+  font-family: inherit;
+}
+
+button {
+  border-width: 0;
+  border-radius: 3px;
+  background-color: #396;
+  font-family: inherit;
+  font-weight: 600;
+  padding: 6px 12px;
+  color: #fff;
+  &.warning {
+    background-color: #c63;
+  }
+  &:hover:active {
+    filter: brightness(75%);
+  }
+}
+
+input,
+button {
+  &:focus-visible {
+    outline-width: 0;
+    box-shadow: 0 0 0 2px #36c, 0 0 0 4px #3cf;
+  }
+}

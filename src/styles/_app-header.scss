@@ -1,0 +1,23 @@
+.app-header {
+  flex-shrink: 0;
+  width: fit-content;
+  padding: 0 20px;
+  padding-bottom: 10px;
+  --border-radius: 15px;
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+  background-color: rgba(#000, 0.25);
+  backdrop-filter: blur(5px);
+  margin-bottom: 10px;
+  @include desktop() {
+    margin-left: 20px;
+    border-radius: var(--border-radius);
+  }
+}
+.app-heading {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 6px 12px;
+  font-weight: 600;
+  font-size: 16px;
+}

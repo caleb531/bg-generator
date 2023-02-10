@@ -1,0 +1,29 @@
+.grid-controls-group {
+  display: flex;
+  justify-content: center;
+  gap: 0 10px;
+  margin-bottom: 10px;
+  & > .grid-control:not(:last-of-type) {
+    padding-right: 20px;
+  }
+}
+
+.grid-control {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  label {
+    font-weight: 600;
+    color: #fff;
+  }
+  label,
+  .grid-control-value {
+    font-size: 14px;
+  }
+  input[type='number'] {
+    width: 50px;
+  }
+  input[type='range'] {
+    width: 100px;
+  }
+}
