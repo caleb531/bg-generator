@@ -16,8 +16,7 @@
     font-weight: 600;
     color: #fff;
   }
-  label,
-  .grid-control-value {
+  label {
     font-size: 14px;
   }
   input[type='number'] {
@@ -40,4 +39,5 @@
 .grid-control-value {
   margin-left: 4px;
   margin-right: 2px;
+  font-size: 16px;
 }
