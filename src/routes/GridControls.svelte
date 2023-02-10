@@ -1,5 +1,6 @@
 <script lang="ts">
   import { grid, regenerateGridTiles, saveGrid } from '../stores/Grid';
+  import GridActionButton from './GridActionButton.svelte';
   import GridColorControl from './GridColorControl.svelte';
   import GridNumberControl from './GridNumberControl.svelte';
   function toggleFullScreen() {
@@ -14,8 +15,8 @@
 
 <form class="grid-controls" on:submit|preventDefault>
   <div class="grid-controls-group">
-    <button type="button" class="warning" on:click={randomizeGrid}>Randomize Grid</button>
-    <button type="button" on:click={toggleFullScreen}>Toggle Fullscreen</button>
+    <GridActionButton type="warning" onAction={randomizeGrid}>Randomize Grid</GridActionButton>
+    <GridActionButton onAction={toggleFullScreen}>Toggle Fullscreen</GridActionButton>
   </div>
   <div class="grid-controls-group">
     <GridNumberControl
