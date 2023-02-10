@@ -27,7 +27,7 @@
   version="1.1"
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 {$grid.width} {$grid.height}"
-  class="image-canvas"
+  class="grid-canvas"
   class:is-fullscreen={$grid.fullScreen}
   preserveAspectRatio="none"
   bind:this={svgElement}
@@ -48,7 +48,7 @@
 
 {#if $grid.fullScreen && svgMarkup}
   <div
-    class="grid-full-screen"
+    class="grid-full-screen-image"
     style:background-size="{$grid.width}px {$grid.height}px"
     style:background-image="url('data:image/svg+xml;base64,{window.btoa(svgMarkup)}')"
   />
