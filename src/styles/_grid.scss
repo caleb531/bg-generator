@@ -6,7 +6,6 @@
   @include desktop() {
     max-width: calc(100vw - 270px);
     max-height: calc(100vh - 40px);
-    padding: 40px;
   }
   &.is-fullscreen {
     visibility: hidden;
