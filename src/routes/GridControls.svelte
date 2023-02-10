@@ -49,7 +49,7 @@
     <GridNumberControl
       id="column_count"
       label="Columns"
-      min={0}
+      min={1}
       max={50}
       bind:value={$grid.columnCount}
     />
