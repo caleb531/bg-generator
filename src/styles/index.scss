@@ -58,6 +58,7 @@ a {
 }
 
 .grid-canvas {
+  width: fit-content;
   max-height: calc(100vh - 300px);
   padding: 0 40px;
   box-sizing: content-box;
