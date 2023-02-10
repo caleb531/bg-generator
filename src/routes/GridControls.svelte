@@ -3,12 +3,12 @@
   import GridActionButton from './GridActionButton.svelte';
   import GridColorControl from './GridColorControl.svelte';
   import GridNumberControl from './GridNumberControl.svelte';
-  function toggleFullScreen() {
-    $grid.fullScreen = !$grid.fullScreen;
-    saveGrid();
-  }
   function randomizeGrid() {
     $grid.tiles = regenerateGridTiles($grid);
+    saveGrid();
+  }
+  function toggleFullScreen() {
+    $grid.fullScreen = !$grid.fullScreen;
     saveGrid();
   }
 </script>
