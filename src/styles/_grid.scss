@@ -1,11 +1,14 @@
 .grid-canvas {
   width: fit-content;
-  max-height: calc(100vh - 280px);
+  --area-outside-grid-h: 0px;
+  --area-outside-grid-v: 320px;
+  max-width: calc(100vw - var(--area-outside-grid-h));
+  max-height: calc(100vh - var(--area-outside-grid-v));
   padding: 0 40px;
   box-sizing: content-box;
   @include desktop() {
-    max-width: calc(100vw - 270px);
-    max-height: calc(100vh - 40px);
+    --area-outside-grid-h: 270px;
+    --area-outside-grid-v: 40px;
   }
   &.is-fullscreen {
     visibility: hidden;
