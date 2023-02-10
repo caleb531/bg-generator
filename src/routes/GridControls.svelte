@@ -11,12 +11,30 @@
     $grid.fullScreen = !$grid.fullScreen;
     saveGrid();
   }
+  function getSvgMarkup() {
+    let svgMarkup = document.querySelector('.grid-canvas')?.outerHTML || '';
+    svgMarkup = svgMarkup.replace('<svg ', `<svg width="${$grid.width}" height="${$grid.height}" `);
+    return svgMarkup;
+  }
+  function exportSvg() {
+    const svgMarkup = getSvgMarkup();
+    let blob = new Blob([svgMarkup], { type: 'image/svg+xml' });
+    let a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    // Let the browser pick a filename (it will still have an .svg extension due
+    // to the MIME type defined on the blob)
+    a.download = '';
+    a.click();
+  }
 </script>
 
 <form class="grid-controls" on:submit|preventDefault>
   <div class="grid-controls-group">
     <GridActionButton type="warning" onAction={randomizeGrid}>Randomize Grid</GridActionButton>
     <GridActionButton onAction={toggleFullScreen}>Toggle Fullscreen</GridActionButton>
+  </div>
+  <div class="grid-controls-group">
+    <GridActionButton onAction={exportSvg}>Export SVG</GridActionButton>
   </div>
   <div class="grid-controls-group">
     <GridNumberControl
