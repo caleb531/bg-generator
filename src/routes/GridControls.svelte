@@ -32,11 +32,7 @@
     <GridNumberControl id="height" label="Height" min={1} max={500} bind:value={$grid.height} />
   </div>
   <div class="grid-controls-group">
-    <div class="grid-controls-subgroup">
-      <GridColorControl id="bg_color" label="BG Color" bind:value={$grid.backgroundColor} />
-    </div>
-    <div class="grid-controls-subgroup">
-      <GridColorControl id="tile_color" label="Tile Color" bind:value={$grid.tileColor} />
-    </div>
+    <GridColorControl id="bg_color" label="BG Color" bind:value={$grid.backgroundColor} />
+    <GridColorControl id="tile_color" label="Tile Color" bind:value={$grid.tileColor} />
   </div>
 </form>

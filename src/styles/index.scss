@@ -116,7 +116,7 @@ button {
   justify-content: center;
   gap: 0 10px;
   margin-bottom: 10px;
-  & > *:not(:last-of-type) {
+  & > .grid-control:not(:last-of-type) {
     padding-right: 20px;
   }
 }
