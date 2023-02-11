@@ -19,7 +19,7 @@ export function getSvgMarkup() {
 // within the user's browser
 export function exportSvg() {
   const svgMarkup = getSvgMarkup();
-  const blob = new Blob([svgMarkup], { type: 'image/svg+xml' });
+  const blob = new Blob([svgMarkup.trim() + '\n'], { type: 'image/svg+xml' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   // Let the browser pick a filename (it will still have an .svg extension due
