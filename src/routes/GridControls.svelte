@@ -18,7 +18,13 @@
 <form class="grid-controls" on:submit|preventDefault>
   <div class="grid-controls-group">
     <GridActionButton type="warning" onAction={randomizeGrid}>Randomize Grid</GridActionButton>
-    <GridActionButton onAction={toggleFullScreen}>Toggle Fullscreen</GridActionButton>
+    <GridActionButton onAction={toggleFullScreen}>
+      {#if $grid.fullScreen}
+        Disable Fullscreen
+      {:else}
+        Enable Fullscreen
+      {/if}
+    </GridActionButton>
   </div>
   <div class="grid-controls-group">
     <GridActionButton onAction={exportSvg}>Export SVG</GridActionButton>
