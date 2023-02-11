@@ -29,7 +29,6 @@
   viewBox="0 0 {$grid.width} {$grid.height}"
   class="grid-canvas"
   class:is-fullscreen={$grid.fullScreen}
-  preserveAspectRatio="none"
   bind:this={svgElement}
 >
   <rect x="0" y="0" width="100%" height="100%" fill={$grid.backgroundColor} />
