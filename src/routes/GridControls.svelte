@@ -22,7 +22,7 @@
   </div>
   <div class="grid-controls-group">
     <GridActionButton onAction={exportSvg}>Export SVG</GridActionButton>
-    <GridActionButton onAction={promptForSvgToImport}>Import SVG</GridActionButton>
+    <GridActionButton type="file" onAction={promptForSvgToImport}>Import SVG</GridActionButton>
   </div>
   <div class="grid-controls-group">
     <GridNumberControl
