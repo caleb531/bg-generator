@@ -10,6 +10,8 @@ available since it could have other interesting uses.
 The app is written using Svelte+SvelteKit, and utilizes many of Svelte's core
 features like stores, slots, binding, etc.
 
+[See the app online](https://projects.calebevans.me/bg-generator/)
+
 ## Setup
 
 ### Installing
