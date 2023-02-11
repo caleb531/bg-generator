@@ -4,6 +4,11 @@
   --area-outside-grid-v: 320px;
   max-width: calc(100vw - var(--area-outside-grid-h));
   max-height: calc(100vh - var(--area-outside-grid-v));
+  // Using the new `dvh` dynamic viewport units ensures that Mobile Safari's
+  // browser toolbars don't obsure the grid canvas on iOS; see
+  // <https://caniuse.com/viewport-unit-variants> for details on current browser
+  // compatibility
+  max-height: calc(100dvh - var(--area-outside-grid-v));
   padding: 0 40px;
   box-sizing: content-box;
   @include desktop() {
