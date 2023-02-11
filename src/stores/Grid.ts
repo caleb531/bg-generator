@@ -1,6 +1,6 @@
 import { times } from 'lodash-es';
 import { derived, get, writable } from 'svelte/store';
-import { generateRandomOpacity } from '../routes/utils';
+import { generateRandomOpacity } from '../lib/randomization';
 
 export interface GridTile {
   alpha: number;
