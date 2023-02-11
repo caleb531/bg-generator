@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { exportSvg } from '../lib/export';
+  import { promptForSvgToImport } from '../lib/import';
   import { grid, regenerateGridTiles, saveGrid } from '../stores/Grid';
   import GridActionButton from './GridActionButton.svelte';
   import GridColorControl from './GridColorControl.svelte';
@@ -11,29 +13,6 @@
     $grid.fullScreen = !$grid.fullScreen;
     saveGrid();
   }
-  function getSvgMarkup() {
-    const svgElement = document.querySelector('.grid-canvas');
-    if (!svgElement) {
-      return '';
-    }
-    let clonedSvgElement = svgElement.cloneNode(true) as SVGElement;
-    clonedSvgElement.setAttribute('width', String($grid.width));
-    clonedSvgElement.setAttribute('height', String($grid.height));
-    return clonedSvgElement.outerHTML || '';
-  }
-  function exportSvg() {
-    const svgMarkup = getSvgMarkup();
-    let blob = new Blob([svgMarkup], { type: 'image/svg+xml' });
-    let a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    // Let the browser pick a filename (it will still have an .svg extension due
-    // to the MIME type defined on the blob)
-    a.download = '';
-    a.click();
-  }
-  function importSvg() {
-    alert("doesn't work yet!");
-  }
 </script>
 
 <form class="grid-controls" on:submit|preventDefault>
@@ -43,7 +22,7 @@
   </div>
   <div class="grid-controls-group">
     <GridActionButton onAction={exportSvg}>Export SVG</GridActionButton>
-    <GridActionButton onAction={importSvg}>Import SVG</GridActionButton>
+    <GridActionButton onAction={promptForSvgToImport}>Import SVG</GridActionButton>
   </div>
   <div class="grid-controls-group">
     <GridNumberControl
