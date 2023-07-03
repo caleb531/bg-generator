@@ -6,7 +6,8 @@
   --color-gray-100: #5e635f;
   --color-white: #ffffff;
   --color-blue: #1864f9;
-  --color-orange: #cc5522;
+  --color-orange-500: #cc5522;
+  --color-orange-600: #6e371f;
 
   // Semantic color palette
   --color-body: var(--color-gray-600);
@@ -14,5 +15,7 @@
   --color-control-group-separator: var(--color-gray-200);
   --color-text: var(--color-white);
   --color-button: var(--color-gray-100);
-  --color-button-warning: var(--color-orange);
+  --color-button-border: var(--color-gray-200);
+  --color-button-warning: var(--color-orange-500);
+  --color-button-border-warning: var(--color-orange-600);
 }
