@@ -5,9 +5,8 @@
   let tileWidth: number;
   let tileHeight: number;
   function recomputeConstants($grid: Grid) {
-    tileWidth =
-      ($grid.imageWidth - $grid.gridlineWidth * ($grid.columnCount + 1)) / $grid.columnCount;
-    tileHeight = ($grid.imageHeight - $grid.gridlineWidth * ($grid.rowCount + 1)) / $grid.rowCount;
+    tileWidth = ($grid.imageWidth - $grid.gridlineWidth * $grid.columnCount) / $grid.columnCount;
+    tileHeight = ($grid.imageHeight - $grid.gridlineWidth * $grid.rowCount) / $grid.rowCount;
   }
   $: recomputeConstants($grid);
 
@@ -63,15 +62,13 @@
   {#each { length: $grid.rowCount } as _, r}
     {#each { length: $grid.columnCount } as _, c}
       {@const tile = $grid.tiles[r][c]}
-      {#if tile.color !== $grid.imageBackgroundColor}
-        <rect
-          x={c * (tileHeight + $grid.gridlineWidth) + $grid.gridlineWidth}
-          y={r * (tileWidth + $grid.gridlineWidth) + $grid.gridlineWidth}
-          width={tileWidth}
-          height={tileHeight}
-          fill={tile.color}
-        />
-      {/if}
+      <rect
+        x={c * (tileWidth + $grid.gridlineWidth) + $grid.gridlineWidth}
+        y={r * (tileHeight + $grid.gridlineWidth) + $grid.gridlineWidth}
+        width={tileWidth}
+        height={tileHeight}
+        fill={tile.color}
+      />
     {/each}
   {/each}
 </svg>
