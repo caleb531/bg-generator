@@ -32,32 +32,24 @@
   style="background-color: {$grid.canvasBackgroundColor}"
   bind:this={svgElement}
 >
-  <defs>
-    <rect
-      id="vertical-gridline"
-      x="0"
-      y="0"
-      width={$grid.gridlineWidth}
-      height={$grid.imageHeight}
-      fill={$grid.gridlineColor}
-    />
-    <rect
-      id="horizontal-gridline"
-      x="0"
-      y="0"
-      width={$grid.imageWidth}
-      height={$grid.gridlineWidth}
-      fill={$grid.gridlineColor}
-    />
-  </defs>
-  <!-- Vertical gridlines -->
-  {#each { length: $grid.columnCount } as _, c}
-    <use x={(tileWidth + $grid.gridlineWidth) * c} y="0" xlink:href="#vertical-gridline" />
-  {/each}
-  <!-- Horizontal gridlines -->
-  {#each { length: $grid.rowCount } as _, r}
-    <use x="0" y={(tileHeight + $grid.gridlineWidth) * r} xlink:href="#horizontal-gridline" />
-  {/each}
+  {#if $grid.imageBackgroundColor}
+    <rect x="0" y="0" width="100%" height="100%" fill={$grid.imageBackgroundColor} />
+  {/if}
+  <!-- Gridlines -->
+  <pattern
+    id="gridlines"
+    x="0"
+    y="0"
+    width={tileWidth + $grid.gridlineWidth}
+    height={tileHeight + $grid.gridlineWidth}
+    patternUnits="userSpaceOnUse"
+  >
+    <g fill={$grid.gridlineColor}>
+      <rect x="0" y="0" width={$grid.gridlineWidth} height={tileHeight + $grid.gridlineWidth} />
+      <rect x={$grid.gridlineWidth} y="0" width={tileWidth} height={$grid.gridlineWidth} />
+    </g>
+  </pattern>
+  <rect x="0" y="0" width="100%" height="100%" fill="url(#gridlines)" />
   <!-- Grid Squares -->
   {#each { length: $grid.rowCount } as _, r}
     {#each { length: $grid.columnCount } as _, c}
