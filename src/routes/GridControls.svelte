@@ -4,6 +4,7 @@
   import { grid, regenerateGridTiles, saveGrid } from '../stores/Grid';
   import GridActionButton from './GridActionButton.svelte';
   import GridColorControl from './GridColorControl.svelte';
+  import GridControlSpacer from './GridControlSpacer.svelte';
   import GridNumberControl from './GridNumberControl.svelte';
   function randomizeGrid() {
     $grid.tiles = regenerateGridTiles($grid);
@@ -37,17 +38,32 @@
       bind:value={$grid.columnCount}
     />
     <GridNumberControl id="row_count" label="Rows" min={1} max={50} bind:value={$grid.rowCount} />
-    <GridNumberControl id="width" label="Width" min={1} max={500} bind:value={$grid.imageWidth} />
     <GridNumberControl
-      id="height"
-      label="Height"
+      id="width"
+      label="Image Width"
+      min={1}
+      max={500}
+      bind:value={$grid.imageWidth}
+    />
+    <GridNumberControl
+      id="image_height"
+      label="Image Height"
       min={1}
       max={500}
       bind:value={$grid.imageHeight}
     />
+    <GridNumberControl
+      id="gridline_width"
+      label="Gridline Width"
+      min={1}
+      max={500}
+      bind:value={$grid.gridlineWidth}
+    />
+    <GridControlSpacer />
   </div>
   <div class="grid-controls-group">
     <GridColorControl id="bg_color" label="Canvas BG" bind:value={$grid.canvasBackgroundColor} />
     <GridColorControl id="bg_color" label="Image BG" bind:value={$grid.imageBackgroundColor} />
+    <GridColorControl id="gridline_color" label="Gridlines" bind:value={$grid.gridlineColor} />
   </div>
 </form>
