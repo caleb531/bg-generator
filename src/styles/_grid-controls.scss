@@ -6,8 +6,10 @@
   max-width: 320px;
   gap: 10px 10px;
   padding-bottom: 20px;
-  border-bottom: solid 1px var(--color-control-group-separator);
-  margin-bottom: 20px;
+  &:not(:last-of-type) {
+    border-bottom: solid 1px var(--color-control-group-separator);
+    margin-bottom: 20px;
+  }
 }
 
 .grid-control {
