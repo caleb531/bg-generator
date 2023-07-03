@@ -3,8 +3,8 @@
   import '@fontsource/source-sans-pro/400.css';
   import '@fontsource/source-sans-pro/600.css';
   import '../styles/index.scss';
+  import AppSidebar from './AppSidebar.svelte';
   import Grid from './Grid.svelte';
-  import GridControls from './GridControls.svelte';
   import LoadingIndicator from './LoadingIndicator.svelte';
 </script>
 
@@ -13,10 +13,7 @@
 </svelte:head>
 
 {#if browser}
-  <header class="app-sidebar">
-    <h1 class="app-heading">BG Generator</h1>
-    <GridControls />
-  </header>
+  <AppSidebar />
   <Grid />
 {:else}
   <LoadingIndicator />

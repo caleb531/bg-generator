@@ -2,6 +2,7 @@ import { times } from 'lodash-es';
 import { derived, get, writable } from 'svelte/store';
 
 export interface GridTile {
+  isSelected?: boolean;
   color: string; // Supports hex, rgb(), rgba(), hsl(), etc.
 }
 export interface Grid {
@@ -41,6 +42,18 @@ export function resizeGrid($grid: Grid): Grid {
       });
     })
   };
+}
+
+export function getSelectedGridTiles($grid: Grid) {
+  const selectedTiles: GridTile[] = [];
+  $grid.tiles.forEach((row) => {
+    row.forEach((tile) => {
+      if (tile.isSelected) {
+        selectedTiles.push(tile);
+      }
+    });
+  });
+  return selectedTiles;
 }
 
 export const defaultGrid: Omit<Grid, 'tiles'> = {

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { tick } from 'svelte';
-  import { grid, type Grid } from '../stores/Grid';
+  import { grid, saveGrid, type Grid } from '../stores/Grid';
 
   let tileWidth: number;
   let tileHeight: number;
@@ -9,6 +9,17 @@
     tileHeight = ($grid.imageHeight - $grid.gridlineWidth * $grid.rowCount) / $grid.rowCount;
   }
   $: recomputeConstants($grid);
+
+  function handleSelectTile(event: MouseEvent) {
+    const rect = event.target as SVGRectElement;
+    const r = parseInt(String(rect?.getAttribute('data-row-index')), 10);
+    const c = parseInt(String(rect?.getAttribute('data-column-index')), 10);
+    if (!(r >= 0 && c >= 0)) {
+      return;
+    }
+    $grid.tiles[r][c].isSelected = !$grid.tiles[r][c].isSelected;
+    saveGrid();
+  }
 
   let svgElement: SVGElement;
   let svgMarkup = '';
@@ -31,9 +42,20 @@
   class:is-fullscreen={$grid.fullScreen}
   style="background-color: {$grid.canvasBackgroundColor}"
   bind:this={svgElement}
+  on:click={handleSelectTile}
+  on:keydown={() => {
+    /* noop for now */
+  }}
 >
   {#if $grid.imageBackgroundColor}
-    <rect x="0" y="0" width="100%" height="100%" fill={$grid.imageBackgroundColor} />
+    <rect
+      x="0"
+      y="0"
+      width="100%"
+      height="100%"
+      fill={$grid.imageBackgroundColor}
+      class="grid-image-background-color"
+    />
   {/if}
   <!-- Gridlines -->
   <pattern
@@ -49,7 +71,7 @@
       <rect x={$grid.gridlineWidth} y="0" width={tileWidth} height={$grid.gridlineWidth} />
     </g>
   </pattern>
-  <rect x="0" y="0" width="100%" height="100%" fill="url(#gridlines)" />
+  <rect x="0" y="0" width="100%" height="100%" fill="url(#gridlines)" class="grid-gridlines" />
   <!-- Grid Squares -->
   {#each { length: $grid.rowCount } as _, r}
     {#each { length: $grid.columnCount } as _, c}
@@ -60,6 +82,10 @@
         width={tileWidth}
         height={tileHeight}
         fill={tile.color}
+        class="grid-tile"
+        class:is-selected={tile.isSelected}
+        data-column-index={c}
+        data-row-index={r}
       />
     {/each}
   {/each}

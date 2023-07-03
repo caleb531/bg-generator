@@ -13,7 +13,7 @@ export function getSvgMarkup() {
   clonedSvgElement.removeAttribute('style');
   clonedSvgElement.setAttribute('width', String($grid.imageWidth));
   clonedSvgElement.setAttribute('height', String($grid.imageHeight));
-  // Process all tiles as well
+  // Process gridlines region and tiles as well
   Array.from(clonedSvgElement.querySelectorAll('rect')).forEach((rectElement) => {
     rectElement.removeAttribute('class');
     rectElement.removeAttribute('style');

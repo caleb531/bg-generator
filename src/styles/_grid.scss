@@ -2,6 +2,7 @@
   width: fit-content;
   --area-outside-grid-h: 0px;
   --area-outside-grid-v: 320px;
+  --grid-tile-selection-width: 0.5;
   max-width: calc(100vw - var(--area-outside-grid-h));
   max-height: calc(100vh - var(--area-outside-grid-v));
   // Using the new `dvh` dynamic viewport units ensures that Mobile Safari's
@@ -31,4 +32,9 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
+}
+.grid-tile.is-selected,
+.grid-tile:hover {
+  stroke: var(--color-grid-tile-selected);
+  stroke-width: --grid-tile-selection-width;
 }
