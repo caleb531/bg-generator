@@ -1,0 +1,16 @@
+:root {
+  // Base color palette
+  --color-gray-100: #1e1e1e;
+  --color-gray-200: #2f2f2f;
+  --color-gray-300: #3e4440;
+  --color-gray-500: #5e635f;
+  --color-white: #ffffff;
+  --color-blue: #1864f9;
+
+  // Semantic color palette
+  --color-body: var(--color-gray-100);
+  --color-panel: var(--color-gray-200);
+  --color-control-group-separator: var(--color-gray-300);
+  --color-text: var(--color-white);
+  --color-button: var(--color-gray-500);
+}

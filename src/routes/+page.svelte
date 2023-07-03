@@ -1,5 +1,7 @@
 <script lang="ts">
   import { browser } from '$app/environment';
+  import '@fontsource/source-sans-pro/400.css';
+  import '@fontsource/source-sans-pro/600.css';
   import '../styles/index.scss';
   import Grid from './Grid.svelte';
   import GridControls from './GridControls.svelte';
@@ -11,7 +13,7 @@
 </svelte:head>
 
 {#if browser}
-  <header class="app-header">
+  <header class="app-sidebar">
     <h1 class="app-heading">BG Generator</h1>
     <GridControls />
   </header>

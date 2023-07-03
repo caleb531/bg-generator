@@ -1,11 +1,12 @@
 .grid-controls-group {
   display: flex;
   justify-content: center;
-  gap: 0 10px;
-  margin-bottom: 10px;
-  & > .grid-control:not(:last-of-type) {
-    padding-right: 20px;
-  }
+  flex-wrap: wrap;
+  max-width: 280px;
+  gap: 10px 10px;
+  padding-bottom: 20px;
+  border-bottom: solid 1px var(--color-control-group-separator);
+  margin-bottom: 20px;
 }
 
 .grid-control {
@@ -13,10 +14,8 @@
   flex-direction: column;
   align-items: flex-start;
   label {
-    font-weight: 600;
-    color: #fff;
-  }
-  label {
+    margin-right: 10px;
+    color: var(--color-text);
     font-size: 14px;
   }
   input[type='number'] {
@@ -25,7 +24,7 @@
     padding: 1px 4px;
   }
   input[type='range'] {
-    width: 100px;
+    width: 120px;
   }
 }
 
