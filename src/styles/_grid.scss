@@ -10,6 +10,10 @@
   // compatibility
   max-height: calc(100dvh - var(--area-outside-grid-v));
   padding: 0 40px;
+  // Ensure that the canvas background color (which is applied as an inline
+  // style to the SVG canvas) does not extend to include the padding (since the
+  // padding is only to create breathing room)
+  background-clip: content-box;
   box-sizing: content-box;
   @include desktop() {
     --area-outside-grid-h: 270px;

@@ -8,6 +8,6 @@
 <div class="grid-control">
   <div class="grid-control-row">
     <label for="grid-controls-{id}">{label}:</label>
-    <input id="grid-controls-{id}" type="color" name={id} bind:value on:input={saveGrid} />
+    <input id="grid-controls-{id}" type="text" name={id} bind:value on:input={saveGrid} />
   </div>
 </div>

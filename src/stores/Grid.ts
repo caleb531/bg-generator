@@ -1,54 +1,58 @@
 import { times } from 'lodash-es';
 import { derived, get, writable } from 'svelte/store';
-import { generateRandomOpacity } from '../lib/randomization';
 
 export interface GridTile {
-  alpha: number;
+  color: string; // Supports hex, rgb(), rgba(), hsl(), etc.
 }
-
 export interface Grid {
   fullScreen: boolean;
   columnCount: number;
   rowCount: number;
-  width: number;
-  height: number;
-  tiles: GridTile[];
-  backgroundColor: string;
-  tileColor: string;
+  imageWidth: number;
+  imageHeight: number;
+  gridlineWidth: number;
+  gridlineColor: string;
+  canvasBackgroundColor: string; // Not part of exported SVG
+  imageBackgroundColor: string; // Is part of exported SVG
+  tiles: GridTile[][]; // A two-dimensional array of every tile in the grid; the total number of tiles must be equal to rowCount * columnCount; the rendering optimization mentioned in idea (1) will be responsible for not rendering invisible tiles
 }
 
 export function generateGridTiles($grid: Omit<Grid, 'tiles'>): Grid['tiles'] {
-  const tileCount = $grid.columnCount * $grid.rowCount;
-  return times(tileCount, () => {
-    return {
-      alpha: generateRandomOpacity()
-    };
+  return times($grid.rowCount, () => {
+    return times($grid.columnCount, () => {
+      return {
+        color: 'transparent'
+      };
+    });
   });
 }
 export const regenerateGridTiles = generateGridTiles;
 
 export function resizeGrid($grid: Grid): Grid {
-  const tileCount = $grid.columnCount * $grid.rowCount;
   return {
     ...$grid,
-    tiles: times(
-      tileCount,
-      (i) =>
-        $grid.tiles[i] || {
-          alpha: generateRandomOpacity()
-        }
-    )
+    tiles: times($grid.rowCount, (r) => {
+      return times($grid.columnCount, (c) => {
+        return (
+          $grid.tiles[r][c] || {
+            color: 'transparent'
+          }
+        );
+      });
+    })
   };
 }
 
 export const defaultGrid: Omit<Grid, 'tiles'> = {
   fullScreen: false,
-  columnCount: 10,
-  rowCount: 10,
-  width: 100,
-  height: 100,
-  backgroundColor: '#006688',
-  tileColor: '#000000'
+  columnCount: 20,
+  rowCount: 8,
+  imageWidth: 200,
+  imageHeight: 80,
+  gridlineWidth: 1,
+  gridlineColor: 'rgba(0, 0, 0, 0.1)',
+  canvasBackgroundColor: '#fff',
+  imageBackgroundColor: 'transparent'
 };
 
 // Retrieve user's persisted grid data from local browser storage

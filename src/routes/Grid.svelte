@@ -5,8 +5,9 @@
   let tileWidth: number;
   let tileHeight: number;
   function recomputeConstants($grid: Grid) {
-    tileWidth = $grid.width / $grid.columnCount;
-    tileHeight = $grid.height / $grid.rowCount;
+    tileWidth =
+      ($grid.imageWidth - $grid.gridlineWidth * ($grid.columnCount + 1)) / $grid.columnCount;
+    tileHeight = ($grid.imageHeight - $grid.gridlineWidth * ($grid.rowCount + 1)) / $grid.rowCount;
   }
   $: recomputeConstants($grid);
 
@@ -24,31 +25,61 @@
 </script>
 
 <svg
-  version="1.1"
   xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 {$grid.width} {$grid.height}"
+  viewBox="0 0 {$grid.imageWidth} {$grid.imageHeight}"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
   class="grid-canvas"
   class:is-fullscreen={$grid.fullScreen}
+  style="background-color: {$grid.canvasBackgroundColor}"
   bind:this={svgElement}
 >
-  <rect x="0" y="0" width="100%" height="100%" fill={$grid.backgroundColor} />
-  <g fill={$grid.tileColor}>
-    {#each $grid.tiles as gridTile, i}
-      <rect
-        x={Math.floor(i % $grid.columnCount) * tileWidth}
-        y={Math.floor(i / $grid.columnCount) * tileHeight}
-        width={tileWidth}
-        height={tileHeight}
-        opacity={gridTile.alpha}
-      />
+  <defs>
+    <rect
+      id="vertical-gridline"
+      x="0"
+      y="0"
+      width={$grid.gridlineWidth}
+      height={$grid.imageHeight}
+      fill={$grid.gridlineColor}
+    />
+    <rect
+      id="horizontal-gridline"
+      x="0"
+      y="0"
+      width={$grid.imageWidth}
+      height={$grid.gridlineWidth}
+      fill={$grid.gridlineColor}
+    />
+  </defs>
+  <!-- Vertical gridlines -->
+  {#each { length: $grid.columnCount } as _, c}
+    <use x={(tileWidth + $grid.gridlineWidth) * c} y="0" xlink:href="#vertical-gridline" />
+  {/each}
+  <!-- Horizontal gridlines -->
+  {#each { length: $grid.rowCount } as _, r}
+    <use x="0" y={(tileHeight + $grid.gridlineWidth) * r} xlink:href="#horizontal-gridline" />
+  {/each}
+  <!-- Grid Squares -->
+  {#each { length: $grid.rowCount } as _, r}
+    {#each { length: $grid.columnCount } as _, c}
+      {@const tile = $grid.tiles[r][c]}
+      {#if tile.color !== $grid.imageBackgroundColor}
+        <rect
+          x={c * (tileHeight + $grid.gridlineWidth) + $grid.gridlineWidth}
+          y={r * (tileWidth + $grid.gridlineWidth) + $grid.gridlineWidth}
+          width={tileWidth}
+          height={tileHeight}
+          fill={tile.color}
+        />
+      {/if}
     {/each}
-  </g>
+  {/each}
 </svg>
 
 {#if $grid.fullScreen && svgMarkup}
   <div
     class="grid-full-screen-image"
-    style:background-size="{$grid.width}px {$grid.height}px"
+    style:background-size="{$grid.imageWidth}px {$grid.imageHeight}px"
     style:background-image="url('data:image/svg+xml;base64,{window.btoa(svgMarkup)}')"
   />
 {/if}

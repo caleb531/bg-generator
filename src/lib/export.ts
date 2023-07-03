@@ -10,8 +10,9 @@ export function getSvgMarkup() {
   const $grid = get(grid);
   const clonedSvgElement = svgElement.cloneNode(true) as SVGElement;
   clonedSvgElement.removeAttribute('class');
-  clonedSvgElement.setAttribute('width', String($grid.width));
-  clonedSvgElement.setAttribute('height', String($grid.height));
+  clonedSvgElement.removeAttribute('style');
+  clonedSvgElement.setAttribute('width', String($grid.imageWidth));
+  clonedSvgElement.setAttribute('height', String($grid.imageHeight));
   return clonedSvgElement.outerHTML || '';
 }
 

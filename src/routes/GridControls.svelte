@@ -37,11 +37,17 @@
       bind:value={$grid.columnCount}
     />
     <GridNumberControl id="row_count" label="Rows" min={1} max={50} bind:value={$grid.rowCount} />
-    <GridNumberControl id="width" label="Width" min={1} max={500} bind:value={$grid.width} />
-    <GridNumberControl id="height" label="Height" min={1} max={500} bind:value={$grid.height} />
+    <GridNumberControl id="width" label="Width" min={1} max={500} bind:value={$grid.imageWidth} />
+    <GridNumberControl
+      id="height"
+      label="Height"
+      min={1}
+      max={500}
+      bind:value={$grid.imageHeight}
+    />
   </div>
   <div class="grid-controls-group">
-    <GridColorControl id="bg_color" label="BG Color" bind:value={$grid.backgroundColor} />
-    <GridColorControl id="tile_color" label="Tile Color" bind:value={$grid.tileColor} />
+    <GridColorControl id="bg_color" label="Canvas BG" bind:value={$grid.canvasBackgroundColor} />
+    <GridColorControl id="bg_color" label="Image BG" bind:value={$grid.imageBackgroundColor} />
   </div>
 </form>
