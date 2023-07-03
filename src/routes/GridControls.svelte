@@ -1,16 +1,12 @@
 <script lang="ts">
   import { exportSvg } from '../lib/export';
   import { promptForSvgToImport } from '../lib/import';
-  import { grid, regenerateGridTiles, saveGrid } from '../stores/Grid';
+  import { grid, saveGrid } from '../stores/Grid';
   import GridActionButton from './GridActionButton.svelte';
   import GridColorControl from './GridColorControl.svelte';
   import GridControlGroup from './GridControlGroup.svelte';
   import GridControlSpacer from './GridControlSpacer.svelte';
   import GridNumberControl from './GridNumberControl.svelte';
-  function randomizeGrid() {
-    $grid.tiles = regenerateGridTiles($grid);
-    saveGrid();
-  }
   function toggleFullScreen() {
     $grid.fullScreen = !$grid.fullScreen;
     saveGrid();
@@ -19,7 +15,6 @@
 
 <form class="grid-controls" on:submit|preventDefault>
   <GridControlGroup>
-    <GridActionButton type="warning" onAction={randomizeGrid}>Randomize Grid</GridActionButton>
     <GridActionButton onAction={toggleFullScreen}>
       {#if $grid.fullScreen}
         Disable Fullscreen
