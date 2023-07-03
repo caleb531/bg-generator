@@ -1,22 +1,24 @@
 input[type='text'],
 input[type='number'],
 input[type='search'] {
-  border-width: 0;
-  border-radius: 3px;
+  border: solid 1px var(--color-input-border);
+  background-clip: padding-box;
+  border-radius: 5px;
   padding: 4px 6px;
+  color: var(--color-input-text);
   font-family: inherit;
 }
 
 button {
   border: solid 1px var(--color-button-border);
-  border-radius: 3px;
+  background-clip: padding-box;
+  border-radius: 5px;
   background-color: var(--color-button);
   font-family: inherit;
   font-size: 12px;
   padding: 6px 12px;
   color: var(--color-text);
   &.warning {
-    border-color: var(--color-button-border-warning);
     background-color: var(--color-button-warning);
   }
   &:hover:active {
@@ -45,7 +47,6 @@ input[type='number'] {
 }
 
 input[type='color'] {
-  // border: solid 1px rgba(255, 255, 255, 0.2);
   border-width: 0;
   background: none;
 }
@@ -57,5 +58,5 @@ input[type='color']::-webkit-color-swatch-wrapper {
 }
 input[type='color']::-webkit-color-swatch {
   border-radius: 50%;
-  border: solid 1px rgba(255, 255, 255, 0.2);
+  border: solid 1px var(--color-input-border);
 }

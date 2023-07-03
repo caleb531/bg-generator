@@ -1,10 +1,12 @@
 :root {
   // Base color palette
+  --color-black: #000;
   --color-gray-600: #1e1e1e;
   --color-gray-300: #2f2f2f;
   --color-gray-200: #3e4440;
   --color-gray-100: #5e635f;
   --color-white: #ffffff;
+  --color-border: rgba(0, 0, 0, 0.25);
   --color-blue: #1864f9;
   --color-orange-500: #cc5522;
   --color-orange-600: #6e371f;
@@ -14,8 +16,11 @@
   --color-panel: var(--color-gray-300);
   --color-control-group-separator: var(--color-gray-200);
   --color-text: var(--color-white);
+  --color-input: var(--color-white);
+  --color-input-text: var(--color-black);
+  --color-input-border: var(--color-border);
   --color-button: var(--color-gray-100);
-  --color-button-border: var(--color-gray-200);
+  --color-button-border: var(--color-border);
   --color-button-warning: var(--color-orange-500);
   --color-button-border-warning: var(--color-orange-600);
 }
