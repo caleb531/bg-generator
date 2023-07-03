@@ -13,6 +13,13 @@ export function getSvgMarkup() {
   clonedSvgElement.removeAttribute('style');
   clonedSvgElement.setAttribute('width', String($grid.imageWidth));
   clonedSvgElement.setAttribute('height', String($grid.imageHeight));
+  // Remove tiles that blend in with the background of the SVG
+  Array.from(clonedSvgElement.querySelectorAll('rect')).forEach((rectElement) => {
+    const rectFill = rectElement.getAttribute('fill');
+    if (rectFill === 'transparent' || rectFill === $grid.imageBackgroundColor) {
+      rectElement.remove();
+    }
+  });
   return clonedSvgElement.outerHTML || '';
 }
 
