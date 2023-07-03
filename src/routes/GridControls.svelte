@@ -4,6 +4,7 @@
   import { grid, regenerateGridTiles, saveGrid } from '../stores/Grid';
   import GridActionButton from './GridActionButton.svelte';
   import GridColorControl from './GridColorControl.svelte';
+  import GridControlGroup from './GridControlGroup.svelte';
   import GridControlSpacer from './GridControlSpacer.svelte';
   import GridNumberControl from './GridNumberControl.svelte';
   function randomizeGrid() {
@@ -17,7 +18,7 @@
 </script>
 
 <form class="grid-controls" on:submit|preventDefault>
-  <div class="grid-controls-group">
+  <GridControlGroup>
     <GridActionButton type="warning" onAction={randomizeGrid}>Randomize Grid</GridActionButton>
     <GridActionButton onAction={toggleFullScreen}>
       {#if $grid.fullScreen}
@@ -28,8 +29,8 @@
     </GridActionButton>
     <GridActionButton onAction={exportSvg}>Export SVG</GridActionButton>
     <GridActionButton type="file" onAction={promptForSvgToImport}>Import SVG</GridActionButton>
-  </div>
-  <div class="grid-controls-group">
+  </GridControlGroup>
+  <GridControlGroup>
     <GridNumberControl
       id="column_count"
       label="Columns"
@@ -60,10 +61,10 @@
       bind:value={$grid.gridlineWidth}
     />
     <GridControlSpacer />
-  </div>
-  <div class="grid-controls-group">
+  </GridControlGroup>
+  <GridControlGroup>
     <GridColorControl id="bg_color" label="Canvas BG" bind:value={$grid.canvasBackgroundColor} />
     <GridColorControl id="bg_color" label="Image BG" bind:value={$grid.imageBackgroundColor} />
     <GridColorControl id="gridline_color" label="Gridlines" bind:value={$grid.gridlineColor} />
-  </div>
+  </GridControlGroup>
 </form>
