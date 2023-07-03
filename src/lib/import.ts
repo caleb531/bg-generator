@@ -7,14 +7,14 @@ export function setGridFromSvg(svgMarkup: string) {
   const svgDocument = parser.parseFromString(svgMarkup, 'text/xml');
   const svgElement = svgDocument.documentElement;
   const [width, height] =
-    svgElement.getAttribute('viewBox')?.split(' ').slice(-2).map(Number) || [];
+    svgElement.getAttribute('viewBox')?.split(' ').slice(-2).map(Number) ?? [];
   if (!width || !height) {
     console.error('width or height is not defined', width, height);
     return;
   }
   const rects = Array.from(svgElement.querySelectorAll('rect'));
-  const backgroundColor = rects[0].getAttribute('fill') || defaultGrid.backgroundColor;
-  const tileColor = svgElement.querySelector('g')?.getAttribute('fill') || defaultGrid.tileColor;
+  const backgroundColor = rects[0].getAttribute('fill') ?? defaultGrid.backgroundColor;
+  const tileColor = svgElement.querySelector('g')?.getAttribute('fill') ?? defaultGrid.tileColor;
   const columnCount = width / Number(rects[1].getAttribute('width'));
   const rowCount = height / Number(rects[1].getAttribute('height'));
   grid.update(($grid) => {

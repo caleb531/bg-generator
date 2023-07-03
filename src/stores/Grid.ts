@@ -34,7 +34,7 @@ export function resizeGrid($grid: Grid): Grid {
     tiles: times($grid.rowCount, (r) => {
       return times($grid.columnCount, (c) => {
         return (
-          $grid.tiles[r][c] || {
+          $grid.tiles[r][c] ?? {
             color: 'transparent'
           }
         );
