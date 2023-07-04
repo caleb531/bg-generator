@@ -88,12 +88,6 @@ export function restoreGrid(): Grid {
 
 export const grid = writable(restoreGrid());
 
-// Watch for changes to individual grid properties
-export const gridColumnCount = derived(grid, ($grid) => $grid.columnCount);
-export const gridRowCount = derived(grid, ($grid) => $grid.rowCount);
-gridColumnCount.subscribe(() => grid.update(resizeGrid));
-gridRowCount.subscribe(() => grid.update(resizeGrid));
-
 export function toggleGridTileSelection(r: number, c: number) {
   grid.update(($grid) => {
     $grid.tiles[r][c].isSelected = !$grid.tiles[r][c].isSelected;
@@ -163,5 +157,11 @@ export function saveGrid() {
   const gridStoreToSave: Grid = get(grid);
   localStorage.setItem('bg-generator:grid', JSON.stringify(gridStoreToSave));
 }
+
+// Watch for changes to individual grid properties
+export const gridColumnCount = derived(grid, ($grid) => $grid.columnCount);
+export const gridRowCount = derived(grid, ($grid) => $grid.rowCount);
+gridColumnCount.subscribe(() => grid.update(resizeGrid));
+gridRowCount.subscribe(() => grid.update(resizeGrid));
 
 saveGrid();
