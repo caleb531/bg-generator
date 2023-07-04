@@ -5,6 +5,7 @@
   export let label: string;
   export let value: string;
 
+  let colorSwatchElement: HTMLDivElement;
   let isValid = true;
 
   function validateInputValue(event: Event): void {
@@ -26,13 +27,22 @@
 <div class="grid-control">
   <div class="grid-control-row">
     <label for="grid-controls-{id}">{label}:</label>
-    <input
-      id="grid-controls-{id}"
-      type="text"
-      name={id}
-      {value}
-      class:is-invalid={!isValid}
-      on:input={validateInputValue}
-    />
+    <div class="grid-control-subrow">
+      {#if isValid}
+        <div
+          class="grid-control-color-swatch"
+          bind:this={colorSwatchElement}
+          style="background-color: {value};"
+        />
+      {/if}
+      <input
+        id="grid-controls-{id}"
+        type="text"
+        name={id}
+        {value}
+        class:is-invalid={!isValid}
+        on:input={validateInputValue}
+      />
+    </div>
   </div>
 </div>
