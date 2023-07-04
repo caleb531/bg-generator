@@ -52,8 +52,8 @@
     <GridNumberControl
       id="gridline_width"
       label="Gridline Width"
-      min={1}
-      max={500}
+      min={0}
+      max={10}
       bind:value={$grid.gridlineWidth}
     />
     <GridControlSpacer />
