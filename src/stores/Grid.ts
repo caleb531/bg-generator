@@ -94,6 +94,13 @@ export const gridRowCount = derived(grid, ($grid) => $grid.rowCount);
 gridColumnCount.subscribe(() => grid.update(resizeGrid));
 gridRowCount.subscribe(() => grid.update(resizeGrid));
 
+export function toggleGridTileSelection(r: number, c: number) {
+  grid.update(($grid) => {
+    $grid.tiles[r][c].isSelected = !$grid.tiles[r][c].isSelected;
+    return $grid;
+  });
+}
+
 // Persist user's grid data to local browser storage
 export function saveGrid() {
   if (typeof localStorage === 'undefined') {

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { tick } from 'svelte';
-  import { grid, saveGrid, type Grid } from '../stores/Grid';
+  import { grid, saveGrid, toggleGridTileSelection, type Grid } from '../stores/Grid';
 
   let tileWidth: number;
   let tileHeight: number;
@@ -19,7 +19,7 @@
     if (!(r >= 0 && c >= 0)) {
       return;
     }
-    $grid.tiles[r][c].isSelected = !$grid.tiles[r][c].isSelected;
+    toggleGridTileSelection(r, c);
     saveGrid();
   }
 
