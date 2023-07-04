@@ -47,7 +47,7 @@
       bind:value={pendingNewTileColor}
       placeholder="Enter a new color"
     />
-    <GridActionButton onAction={changeColorForSelectedTiles}
+    <GridActionButton type="submit" onAction={changeColorForSelectedTiles}
       >Change Color for {selectedGridTiles.length}
       {selectedGridTiles.length === 1 ? 'Tile' : 'Tiles'}</GridActionButton
     >

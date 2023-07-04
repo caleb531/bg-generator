@@ -22,8 +22,11 @@ button {
   font-size: 12px;
   padding: 6px 12px;
   color: var(--color-text);
+  &[type='submit'] {
+    --color-button: var(--color-button-submit);
+  }
   &.warning {
-    background-color: var(--color-button-warning);
+    --color-button: var(--color-button-warning);
   }
   &:hover:active {
     filter: brightness(75%);
