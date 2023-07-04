@@ -24,7 +24,7 @@
       {/if}
     </GridActionButton>
     <GridActionButton onAction={exportSvg}>Export SVG</GridActionButton>
-    <GridActionButton type="file" onAction={promptForSvgToImport}>Import SVG</GridActionButton>
+    <GridActionButton onAction={promptForSvgToImport}>Import SVG</GridActionButton>
   </GridControlGroup>
   <GridControlGroup>
     <GridNumberControl

@@ -3,6 +3,7 @@
     deselectAllTiles,
     getSelectedGridTiles,
     grid,
+    saveGrid,
     selectAllTiles,
     selectTilesWithColor,
     setColorForSelectedTiles,
@@ -16,6 +17,15 @@
   let selectedGridTiles: GridTile[] = [];
   // The new color to which to change
   let pendingNewTileColor: string = '';
+
+  function handleSelectAll() {
+    selectAllTiles();
+    saveGrid();
+  }
+  function handleDeselectAll() {
+    deselectAllTiles();
+    saveGrid();
+  }
 
   function handleSelectTilesWithColor() {
     selectTilesWithColor(selectedGridTiles[0]?.color ?? '');
@@ -32,8 +42,8 @@
 
 <GridControlForm>
   <GridControlGroup>
-    <GridActionButton onAction={selectAllTiles}>Select All</GridActionButton>
-    <GridActionButton onAction={deselectAllTiles}>Deselect All</GridActionButton>
+    <GridActionButton onAction={handleSelectAll}>Select All</GridActionButton>
+    <GridActionButton onAction={handleDeselectAll}>Deselect All</GridActionButton>
     {#if selectedGridTiles.length === 1}
       <GridActionButton onAction={handleSelectTilesWithColor}
         >Select Tiles with Same Color</GridActionButton
