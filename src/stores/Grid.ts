@@ -18,6 +18,12 @@ export interface Grid {
   tiles: GridTile[][]; // A two-dimensional array of every tile in the grid; the total number of tiles must be equal to rowCount * columnCount; the rendering optimization mentioned in idea (1) will be responsible for not rendering invisible tiles
 }
 
+export function forEachTile($grid: Grid, callback: (tile: GridTile) => void): void {
+  $grid.tiles.forEach((row) => {
+    row.forEach(callback);
+  });
+}
+
 export function generateGridTiles($grid: Omit<Grid, 'tiles'>): Grid['tiles'] {
   return times($grid.rowCount, () => {
     return times($grid.columnCount, () => {
@@ -46,12 +52,10 @@ export function resizeGrid($grid: Grid): Grid {
 
 export function getSelectedGridTiles($grid: Grid): GridTile[] {
   const selectedTiles: GridTile[] = [];
-  $grid.tiles.forEach((row) => {
-    row.forEach((tile) => {
-      if (tile.isSelected) {
-        selectedTiles.push(tile);
-      }
-    });
+  forEachTile($grid, (tile) => {
+    if (tile.isSelected) {
+      selectedTiles.push(tile);
+    }
   });
   return selectedTiles;
 }
@@ -97,10 +101,8 @@ export function toggleGridTileSelection(r: number, c: number): void {
 
 export function selectAllTiles(): void {
   grid.update(($grid) => {
-    $grid.tiles.forEach((row) => {
-      row.forEach((tile) => {
-        tile.isSelected = true;
-      });
+    forEachTile($grid, (tile) => {
+      tile.isSelected = true;
     });
     return $grid;
   });
@@ -108,10 +110,8 @@ export function selectAllTiles(): void {
 
 export function deselectAllTiles(): void {
   grid.update(($grid) => {
-    $grid.tiles.forEach((row) => {
-      row.forEach((tile) => {
-        tile.isSelected = false;
-      });
+    forEachTile($grid, (tile) => {
+      tile.isSelected = false;
     });
     return $grid;
   });
@@ -119,12 +119,10 @@ export function deselectAllTiles(): void {
 
 export function selectTilesWithColor(color: string): void {
   grid.update(($grid) => {
-    $grid.tiles.forEach((row) => {
-      row.forEach((tile) => {
-        if (tile.color === color) {
-          tile.isSelected = true;
-        }
-      });
+    forEachTile($grid, (tile) => {
+      if (tile.color === color) {
+        tile.isSelected = true;
+      }
     });
     return $grid;
   });
