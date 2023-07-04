@@ -2,7 +2,8 @@
   width: fit-content;
   --area-outside-grid-h: 0px;
   --area-outside-grid-v: 320px;
-  --grid-tile-selection-width: 0.5;
+  --grid-tile-selection-width-pending: 0.5;
+  --grid-tile-selection-width-committed: 1;
   max-width: calc(100vw - var(--area-outside-grid-h));
   max-height: calc(100vh - var(--area-outside-grid-v));
   // Using the new `dvh` dynamic viewport units ensures that Mobile Safari's
@@ -33,8 +34,11 @@
   height: 100%;
   pointer-events: none;
 }
-.grid-tile.is-selected,
 .grid-tile:hover {
   stroke: var(--color-grid-tile-selected);
-  stroke-width: --grid-tile-selection-width;
+  stroke-width: var(--grid-tile-selection-width-pending);
+}
+.grid-tile.is-selected {
+  stroke: var(--color-grid-tile-selected);
+  stroke-width: var(--grid-tile-selection-width-committed);
 }
