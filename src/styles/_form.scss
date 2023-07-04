@@ -2,11 +2,15 @@ input[type='text'],
 input[type='number'],
 input[type='search'] {
   border: solid 1px var(--color-input-border);
+  background-color: var(--color-input);
   background-clip: padding-box;
   border-radius: 5px;
   padding: 4px 6px;
   color: var(--color-input-text);
   font-family: inherit;
+  &.is-invalid {
+    background-color: var(--color-input-error);
+  }
 }
 
 button {
@@ -30,7 +34,10 @@ input,
 button {
   &:focus-visible {
     outline-width: 0;
-    box-shadow: 0 0 0 2px #36c, 0 0 0 4px #3cf;
+    box-shadow: 0 0 0 1px var(--color-border), 0 0 0 3px var(--color-input-focus-shadow);
+  }
+  &.is-invalid:focus-visible {
+    --color-input-focus-shadow: var(--color-input-focus-shadow-invalid);
   }
 }
 

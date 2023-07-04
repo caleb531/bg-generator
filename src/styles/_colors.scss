@@ -8,6 +8,9 @@
   --color-white: hsl(0, 0%, 100%);
   --color-border: hsla(0, 0%, 0%, 0.25);
   --color-blue: hsl(220, 95%, 54%);
+  --color-turquoise: hsl(200, 100%, 70%);
+  --color-red-100: hsl(0, 100%, 85%);
+  --color-red-400: hsl(0, 80%, 60%);
   --color-orange-500: hsl(18, 71%, 47%);
   --color-orange-600: hsl(18, 56%, 28%);
 
@@ -17,8 +20,11 @@
   --color-control-group-separator: var(--color-gray-200);
   --color-text: var(--color-white);
   --color-input: var(--color-white);
+  --color-input-error: var(--color-red-100);
   --color-input-text: var(--color-black);
   --color-input-border: var(--color-border);
+  --color-input-focus-shadow: var(--color-turquoise);
+  --color-input-focus-shadow-invalid: var(--color-red-400);
   --color-button: var(--color-gray-100);
   --color-button-border: var(--color-border);
   --color-button-warning: var(--color-orange-500);

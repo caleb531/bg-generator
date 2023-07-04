@@ -5,6 +5,26 @@
   export let value: number;
   export let min: number | undefined = 0;
   export let max: number | undefined = undefined;
+
+  let isValid = true;
+
+  function validateInputValue(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (
+      !isNaN(input.valueAsNumber) &&
+      (!min || input.valueAsNumber >= min) &&
+      (!max || input.valueAsNumber <= max)
+    ) {
+      // Consider the value valid if is a valid number and within the specified
+      // boundaries
+      value = input.valueAsNumber;
+      isValid = true;
+      saveGrid();
+    } else {
+      // Do not persist the value as long as it is invalid
+      isValid = false;
+    }
+  }
 </script>
 
 <div class="grid-control">
@@ -18,8 +38,9 @@
       name={id}
       {min}
       {max}
-      bind:value
-      on:input={saveGrid}
+      {value}
+      class:is-invalid={!isValid}
+      on:input={validateInputValue}
     />
   </div>
   <div class="grid-control-row">
@@ -29,8 +50,8 @@
       type="range"
       {min}
       {max}
-      bind:value
-      on:input={saveGrid}
+      {value}
+      on:input={validateInputValue}
     />
   </div>
 </div>
