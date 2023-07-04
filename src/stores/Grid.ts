@@ -123,6 +123,38 @@ export function deselectAllTiles() {
   });
 }
 
+export function selectTilesWithColor(color: string) {
+  grid.update(($grid) => {
+    $grid.tiles.forEach((row) => {
+      row.forEach((tile) => {
+        if (tile.color === color) {
+          tile.isSelected = true;
+        }
+      });
+    });
+    return $grid;
+  });
+}
+
+export function getColorsOfTiles(tiles: GridTile[]): string[] {
+  return Array.from(
+    new Set(
+      tiles.map((tile) => {
+        return tile.color;
+      })
+    )
+  );
+}
+
+export function setColorForSelectedTiles(color: string) {
+  grid.update(($grid) => {
+    getSelectedGridTiles($grid).forEach((tile) => {
+      tile.color = color;
+    });
+    return $grid;
+  });
+}
+
 // Persist user's grid data to local browser storage
 export function saveGrid() {
   if (typeof localStorage === 'undefined') {
