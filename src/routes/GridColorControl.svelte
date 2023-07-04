@@ -4,6 +4,7 @@
   export let id: string;
   export let label: string;
   export let value: string;
+  export let placeholder: string = '';
 
   let colorSwatchElement: HTMLDivElement;
   let isValid = true;
@@ -40,6 +41,7 @@
         type="text"
         name={id}
         {value}
+        {placeholder}
         class:is-invalid={!isValid}
         on:input={validateInputValue}
       />
