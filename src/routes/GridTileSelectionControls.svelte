@@ -34,6 +34,9 @@
   function changeColorForSelectedTiles() {
     setColorForSelectedTiles(pendingNewTileColor);
   }
+  function clearColorForSelectedTiles() {
+    setColorForSelectedTiles('transparent');
+  }
 
   $: selectedGridTiles = getSelectedGridTiles($grid);
 </script>
@@ -59,6 +62,10 @@
     />
     <GridActionButton type="submit" onAction={changeColorForSelectedTiles}
       >Change Color for {selectedGridTiles.length}
+      {selectedGridTiles.length === 1 ? 'Tile' : 'Tiles'}</GridActionButton
+    >
+    <GridActionButton severity="warning" onAction={clearColorForSelectedTiles}
+      >Clear Color for {selectedGridTiles.length}
       {selectedGridTiles.length === 1 ? 'Tile' : 'Tiles'}</GridActionButton
     >
   </GridControlGroup>
