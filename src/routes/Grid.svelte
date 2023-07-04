@@ -39,7 +39,6 @@
 <svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 {$grid.imageWidth} {$grid.imageHeight}"
-  xmlns:xlink="http://www.w3.org/1999/xlink"
   class="grid-canvas"
   class:is-fullscreen={$grid.fullScreen}
   style="background-color: {$grid.canvasBackgroundColor}"
