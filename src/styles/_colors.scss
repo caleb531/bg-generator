@@ -1,15 +1,15 @@
 :root {
   // Base color palette
-  --color-black: #000;
-  --color-gray-600: #1e1e1e;
-  --color-gray-300: #2f2f2f;
-  --color-gray-200: #3e4440;
-  --color-gray-100: #5e635f;
-  --color-white: #ffffff;
-  --color-border: rgba(0, 0, 0, 0.25);
-  --color-blue: #1864f9;
-  --color-orange-500: #cc5522;
-  --color-orange-600: #6e371f;
+  --color-black: hsl(0, 0%, 0%);
+  --color-gray-600: hsl(0, 0%, 12%);
+  --color-gray-300: hsl(0, 0%, 18%);
+  --color-gray-200: hsl(140, 5%, 25%);
+  --color-gray-100: hsl(132, 3%, 38%);
+  --color-white: hsl(0, 0%, 100%);
+  --color-border: hsla(0, 0%, 0%, 0.25);
+  --color-blue: hsl(220, 95%, 54%);
+  --color-orange-500: hsl(18, 71%, 47%);
+  --color-orange-600: hsl(18, 56%, 28%);
 
   // Semantic color palette
   --color-body: var(--color-gray-600);
