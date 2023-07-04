@@ -12,8 +12,8 @@
     const input = event.target as HTMLInputElement;
     if (
       !isNaN(input.valueAsNumber) &&
-      (!min || input.valueAsNumber >= min) &&
-      (!max || input.valueAsNumber <= max)
+      (min === undefined || input.valueAsNumber >= min) &&
+      (max === undefined || input.valueAsNumber <= max)
     ) {
       // Consider the value valid if is a valid number and within the specified
       // boundaries
