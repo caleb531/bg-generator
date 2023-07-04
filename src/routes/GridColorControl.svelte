@@ -29,7 +29,7 @@
   <div class="grid-control-row">
     <label for="grid-controls-{id}">{label}:</label>
     <div class="grid-control-subrow">
-      {#if isValid}
+      {#if isValid && value}
         <div
           class="grid-control-color-swatch"
           bind:this={colorSwatchElement}
