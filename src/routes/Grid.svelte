@@ -5,8 +5,10 @@
   let tileWidth: number;
   let tileHeight: number;
   function recomputeConstants($grid: Grid) {
-    tileWidth = ($grid.imageWidth - $grid.gridlineWidth * $grid.columnCount) / $grid.columnCount;
-    tileHeight = ($grid.imageHeight - $grid.gridlineWidth * $grid.rowCount) / $grid.rowCount;
+    tileWidth =
+      Math.abs($grid.imageWidth - $grid.gridlineWidth * $grid.columnCount) / $grid.columnCount;
+    tileHeight =
+      Math.abs($grid.imageHeight - $grid.gridlineWidth * $grid.rowCount) / $grid.rowCount;
   }
   $: recomputeConstants($grid);
 
