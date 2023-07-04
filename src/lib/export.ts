@@ -2,7 +2,7 @@ import { get } from 'svelte/store';
 import { grid } from '../stores/Grid';
 
 // Retrieve the SVG markup of the current state of the grid as a string
-export function getSvgMarkup() {
+export function getSvgMarkup(): string {
   const svgElement = document.querySelector('.grid-canvas');
   if (!svgElement) {
     return '';
@@ -31,7 +31,7 @@ export function getSvgMarkup() {
 
 // Export the grid to an SVG file and trigger the file download immediately
 // within the user's browser
-export function exportSvg() {
+export function exportSvg(): void {
   const svgMarkup = getSvgMarkup();
   const blob = new Blob([svgMarkup.trim() + '\n'], { type: 'image/svg+xml' });
   const a = document.createElement('a');

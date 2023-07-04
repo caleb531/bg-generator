@@ -44,7 +44,7 @@ export function resizeGrid($grid: Grid): Grid {
   };
 }
 
-export function getSelectedGridTiles($grid: Grid) {
+export function getSelectedGridTiles($grid: Grid): GridTile[] {
   const selectedTiles: GridTile[] = [];
   $grid.tiles.forEach((row) => {
     row.forEach((tile) => {
@@ -88,14 +88,14 @@ export function restoreGrid(): Grid {
 
 export const grid = writable(restoreGrid());
 
-export function toggleGridTileSelection(r: number, c: number) {
+export function toggleGridTileSelection(r: number, c: number): void {
   grid.update(($grid) => {
     $grid.tiles[r][c].isSelected = !$grid.tiles[r][c].isSelected;
     return $grid;
   });
 }
 
-export function selectAllTiles() {
+export function selectAllTiles(): void {
   grid.update(($grid) => {
     $grid.tiles.forEach((row) => {
       row.forEach((tile) => {
@@ -106,7 +106,7 @@ export function selectAllTiles() {
   });
 }
 
-export function deselectAllTiles() {
+export function deselectAllTiles(): void {
   grid.update(($grid) => {
     $grid.tiles.forEach((row) => {
       row.forEach((tile) => {
@@ -117,7 +117,7 @@ export function deselectAllTiles() {
   });
 }
 
-export function selectTilesWithColor(color: string) {
+export function selectTilesWithColor(color: string): void {
   grid.update(($grid) => {
     $grid.tiles.forEach((row) => {
       row.forEach((tile) => {
@@ -140,7 +140,7 @@ export function getColorsOfTiles(tiles: GridTile[]): string[] {
   );
 }
 
-export function setColorForSelectedTiles(color: string) {
+export function setColorForSelectedTiles(color: string): void {
   grid.update(($grid) => {
     getSelectedGridTiles($grid).forEach((tile) => {
       tile.color = color;
@@ -150,7 +150,7 @@ export function setColorForSelectedTiles(color: string) {
 }
 
 // Persist user's grid data to local browser storage
-export function saveGrid() {
+export function saveGrid(): void {
   if (typeof localStorage === 'undefined') {
     return;
   }

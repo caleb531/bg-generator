@@ -2,7 +2,7 @@ import { defaultGrid, grid, saveGrid } from '../stores/Grid';
 
 // Update the grid properties by parsing and interpreting the given string of
 // SVG markup
-export function setGridFromSvg(svgMarkup: string) {
+export function setGridFromSvg(svgMarkup: string): void {
   const parser = new window.DOMParser();
   const svgDocument = parser.parseFromString(svgMarkup, 'text/xml');
   const svgElement = svgDocument.documentElement;
@@ -35,7 +35,7 @@ export function setGridFromSvg(svgMarkup: string) {
 }
 
 // Upload the file specified by the given ChangeEvent for some file input
-export function uploadFile(event: Event) {
+export function uploadFile(event: Event): void {
   const input = event.currentTarget as HTMLInputElement;
   console.log(input.files);
   if (!input.files?.length) {
@@ -43,7 +43,7 @@ export function uploadFile(event: Event) {
     return;
   }
   const reader = new FileReader();
-  reader.onload = (event) => {
+  reader.onload = (event): void => {
     if (event.target?.result) {
       setGridFromSvg(String(event.target.result));
     }
@@ -52,7 +52,7 @@ export function uploadFile(event: Event) {
 }
 
 // Prompt for an SVG file to import from the user's computer
-export function promptForSvgToImport() {
+export function promptForSvgToImport(): void {
   const input = document.createElement('input');
   input.type = 'file';
   input.accept = 'image/svg+xml';

@@ -8,7 +8,7 @@
   import GridControlGroup from './GridControlGroup.svelte';
   import GridControlSpacer from './GridControlSpacer.svelte';
   import GridNumberControl from './GridNumberControl.svelte';
-  function toggleFullScreen() {
+  function toggleFullScreen(): void {
     $grid.fullScreen = !$grid.fullScreen;
     saveGrid();
   }

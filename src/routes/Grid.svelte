@@ -4,7 +4,7 @@
 
   let tileWidth: number;
   let tileHeight: number;
-  function recomputeConstants($grid: Grid) {
+  function recomputeConstants($grid: Grid): void {
     tileWidth =
       Math.abs($grid.imageWidth - $grid.gridlineWidth * $grid.columnCount) / $grid.columnCount;
     tileHeight =
@@ -12,7 +12,7 @@
   }
   $: recomputeConstants($grid);
 
-  function handleSelectTile(event: MouseEvent) {
+  function handleSelectTile(event: MouseEvent): void {
     const rect = event.target as SVGRectElement;
     const r = parseInt(String(rect?.getAttribute('data-row-index')), 10);
     const c = parseInt(String(rect?.getAttribute('data-column-index')), 10);
@@ -25,7 +25,7 @@
 
   let svgElement: SVGElement;
   let svgMarkup = '';
-  async function exportSvgToString($grid: Grid, svgElement: SVGElement) {
+  async function exportSvgToString($grid: Grid, svgElement: SVGElement): Promise<void> {
     if (svgElement && $grid.fullScreen) {
       // Wait for SVG element to finish re-rendering before retrieving outerHTML
       // (source: <https://svelte.dev/tutorial/tick>)

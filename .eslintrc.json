@@ -21,5 +21,8 @@
     "browser": true,
     "es2017": true,
     "node": true
+  },
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "error"
   }
 }
