@@ -101,6 +101,28 @@ export function toggleGridTileSelection(r: number, c: number) {
   });
 }
 
+export function selectAllTiles() {
+  grid.update(($grid) => {
+    $grid.tiles.forEach((row) => {
+      row.forEach((tile) => {
+        tile.isSelected = true;
+      });
+    });
+    return $grid;
+  });
+}
+
+export function deselectAllTiles() {
+  grid.update(($grid) => {
+    $grid.tiles.forEach((row) => {
+      row.forEach((tile) => {
+        tile.isSelected = false;
+      });
+    });
+    return $grid;
+  });
+}
+
 // Persist user's grid data to local browser storage
 export function saveGrid() {
   if (typeof localStorage === 'undefined') {

@@ -4,6 +4,7 @@
   import { grid, saveGrid } from '../stores/Grid';
   import GridActionButton from './GridActionButton.svelte';
   import GridColorControl from './GridColorControl.svelte';
+  import GridControlForm from './GridControlForm.svelte';
   import GridControlGroup from './GridControlGroup.svelte';
   import GridControlSpacer from './GridControlSpacer.svelte';
   import GridNumberControl from './GridNumberControl.svelte';
@@ -13,7 +14,7 @@
   }
 </script>
 
-<form class="grid-controls" on:submit|preventDefault>
+<GridControlForm>
   <GridControlGroup>
     <GridActionButton onAction={toggleFullScreen}>
       {#if $grid.fullScreen}
@@ -62,4 +63,4 @@
     <GridColorControl id="bg_color" label="Image BG" bind:value={$grid.imageBackgroundColor} />
     <GridColorControl id="gridline_color" label="Gridlines" bind:value={$grid.gridlineColor} />
   </GridControlGroup>
-</form>
+</GridControlForm>
