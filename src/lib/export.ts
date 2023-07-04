@@ -19,7 +19,7 @@ export function getSvgMarkup() {
     rectElement.removeAttribute('style');
     const rectFill = rectElement.getAttribute('fill');
     // Remove tiles that blend in with the background of the SVG
-    if (!rectFill || rectFill === 'transparent' || rectFill === $grid.imageBackgroundColor) {
+    if (rectFill === 'transparent' || rectFill === $grid.imageBackgroundColor) {
       rectElement.remove();
     }
   });
