@@ -5,4 +5,4 @@
   $: selectedGridTiles = getSelectedGridTiles($grid);
 </script>
 
-<h2>Selected Tiles: {selectedGridTiles.length}</h2>
+<p>Selected Tiles: {selectedGridTiles.length}</p>
