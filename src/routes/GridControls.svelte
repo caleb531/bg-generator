@@ -59,8 +59,16 @@
     <GridControlSpacer />
   </GridControlGroup>
   <GridControlGroup>
-    <GridColorControl id="bg_color" label="Canvas BG" bind:value={$grid.canvasBackgroundColor} />
-    <GridColorControl id="bg_color" label="Image BG" bind:value={$grid.imageBackgroundColor} />
+    <GridColorControl
+      id="canvas_bg_color"
+      label="Canvas BG"
+      bind:value={$grid.canvasBackgroundColor}
+    />
+    <GridColorControl
+      id="image_bg_color"
+      label="Image BG"
+      bind:value={$grid.imageBackgroundColor}
+    />
     <GridColorControl id="gridline_color" label="Gridlines" bind:value={$grid.gridlineColor} />
   </GridControlGroup>
 </GridControlForm>
