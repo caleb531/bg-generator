@@ -19,10 +19,12 @@ body {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif;
   background-color: var(--color-body);
+  margin-bottom: 20px;
   text-align: center;
   color: var(--color-text);
   @include desktop() {
     flex-direction: row;
+    margin-bottom: 0;
   }
 }
 a {

@@ -4,7 +4,15 @@
   width: 320px;
   height: 100%;
   background-color: var(--color-panel);
+  --sidebar-border-radius: 10px;
+  border-bottom-left-radius: var(--sidebar-border-radius);
+  border-bottom-right-radius: var(--sidebar-border-radius);
+  margin-bottom: 20px;
   overflow-y: scroll;
+  @include desktop() {
+    border-radius: 0;
+    margin-bottom: 0;
+  }
 }
 .app-heading {
   margin: 20px 0;
