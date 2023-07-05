@@ -9,6 +9,7 @@
 
 <header class="app-sidebar">
   <h1 class="app-heading">BG Generator</h1>
+  <span class="author-nav-link">by <a href="https://calebevans.me/">Caleb Evans</a></span>
   {#if selectedGridTiles.length}
     <GridTileSelectionControls />
   {:else}

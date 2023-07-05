@@ -1,5 +1,6 @@
 .app-sidebar {
   flex-shrink: 0;
+  position: relative;
   width: fit-content;
   width: 320px;
   height: 100%;
@@ -19,4 +20,13 @@
   padding: 6px 12px;
   font-weight: 600;
   font-size: 16px;
+}
+.author-nav-link {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 12px;
+  a {
+    text-decoration: none;
+  }
 }
