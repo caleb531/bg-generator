@@ -1,54 +1,92 @@
 import { times } from 'lodash-es';
 import {
-  Grid,
+  getDefaultGridTile,
   getTileHeight,
   getTileWidth,
   getTileX,
   getTileY,
   grid,
-  saveGrid
+  saveGrid,
+  type Grid
 } from '../stores/Grid';
+
+export function getSvgElementFromMarkup(svgMarkup: string): HTMLElement {
+  const parser = new window.DOMParser();
+  const svgDocument = parser.parseFromString(svgMarkup, 'text/xml');
+  return svgDocument.documentElement;
+}
+
+// To avoid binary rounding error, we round all x/y coordinates to the nearest several decimal places
+export function normalizeRectCoord(coord: number | null): number {
+  return Number(Number(coord).toFixed(5));
+}
+
+type RectCoordMap = Record<string, Record<string, SVGRectElement>>;
+
+export function buildCoordMapFromRects(rects: SVGRectElement[]): RectCoordMap {
+  const coordMap: RectCoordMap = {};
+  rects.forEach((rect) => {
+    const x = normalizeRectCoord(Number(rect.getAttribute('x')));
+    const y = normalizeRectCoord(Number(rect.getAttribute('y')));
+    if (!coordMap[x]) {
+      coordMap[x] = {};
+    }
+    coordMap[x][y] = rect;
+  });
+  return coordMap;
+}
 
 // Update the grid properties by parsing and interpreting the given string of
 // SVG markup
 export function setGridFromSvg(svgMarkup: string): void {
-  const parser = new window.DOMParser();
-  const svgDocument = parser.parseFromString(svgMarkup, 'text/xml');
-  const svgElement = svgDocument.documentElement;
+  const svgElement = getSvgElementFromMarkup(svgMarkup);
   const [imageWidth, imageHeight] =
     svgElement.getAttribute('viewBox')?.split(' ').slice(-2).map(Number) ?? [];
   if (!imageWidth || !imageHeight) {
     console.error('width or height is not defined', imageWidth, imageHeight);
     return;
   }
-  const rects = Array.from(svgElement.querySelectorAll('#grid-tiles rect'));
-  const rectsSet = new Set(rects);
   const imageBackgroundColor =
-    svgElement.querySelector('#grid-image-background-color rect')?.getAttribute('fill') || '';
-  const columnCount = imageWidth / Number(rects[0].getAttribute('width'));
-  const rowCount = imageHeight / Number(rects[0].getAttribute('height'));
+    svgElement.querySelector('#grid-image-background-color rect')?.getAttribute('fill') ||
+    'transparent';
+
+  const rects: SVGRectElement[] = Array.from(svgElement.querySelectorAll('#grid-tiles rect'));
+  const rectCoordMap = buildCoordMapFromRects(rects);
+
   const gridlineWidth = Number(
     svgElement.querySelector('#grid-gridline-vertical')?.getAttribute('width')
   );
+  const gridlineColor =
+    svgElement.querySelector('#grid-gridlines-pattern [fill]')?.getAttribute('fill') ||
+    'transparent';
+
+  const columnCount = imageWidth / (Number(rects[0].getAttribute('width')) + gridlineWidth);
+  const rowCount = imageHeight / (Number(rects[0].getAttribute('height')) + gridlineWidth);
+
+  const tileWidth = getTileWidth({ imageWidth, gridlineWidth, columnCount });
+  const tileHeight = getTileHeight({ imageHeight, gridlineWidth, rowCount });
+
   grid.update(($grid): Grid => {
     return {
       ...$grid,
       imageWidth,
       imageHeight,
       imageBackgroundColor,
+      gridlineWidth,
+      gridlineColor,
       columnCount,
       rowCount,
       tiles: times(rowCount, (r) => {
         return times(columnCount, (c) => {
-          const tileWidth = getTileWidth({ imageWidth, gridlineWidth, columnCount });
-          const tileHeight = getTileHeight({ imageHeight, gridlineWidth, rowCount });
-          const x = getTileX({ columnIndex: c, tileWidth, gridlineWidth });
-          const y = getTileY({ rowIndex: r, tileHeight, gridlineWidth });
-          // TODO: replace this dummy GridTile object with the logic that maps
-          // tiles in the SVG to tiles in the data structure
-          return {
-            color: 'transparent'
-          };
+          const x = normalizeRectCoord(getTileX({ columnIndex: c, tileWidth, gridlineWidth }));
+          const y = normalizeRectCoord(getTileY({ rowIndex: r, tileHeight, gridlineWidth }));
+          if (rectCoordMap[x]?.[y] !== undefined) {
+            return {
+              color: rectCoordMap[x][y].getAttribute('fill') || 'transparent'
+            };
+          } else {
+            return getDefaultGridTile();
+          }
         });
       })
     };

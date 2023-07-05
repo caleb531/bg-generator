@@ -24,12 +24,16 @@ export function forEachTile($grid: Grid, callback: (tile: GridTile) => void): vo
   });
 }
 
+export function getDefaultGridTile(): GridTile {
+  return {
+    color: 'transparent'
+  };
+}
+
 export function generateGridTiles($grid: Omit<Grid, 'tiles'>): Grid['tiles'] {
   return times($grid.rowCount, () => {
     return times($grid.columnCount, () => {
-      return {
-        color: 'transparent'
-      };
+      return getDefaultGridTile();
     });
   });
 }
