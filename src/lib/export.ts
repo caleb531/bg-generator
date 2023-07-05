@@ -22,7 +22,10 @@ export function getSvgMarkup(): string {
     });
     const rectFill = rectElement.getAttribute('fill');
     // Remove tiles that blend in with the background of the SVG
-    if (rectFill === 'transparent' || rectFill === $grid.imageBackgroundColor) {
+    if (
+      (rectFill === 'transparent' || rectFill === $grid.imageBackgroundColor) &&
+      rectElement.getAttribute('id') !== 'grid-image-background-color'
+    ) {
       rectElement.remove();
     }
   });
