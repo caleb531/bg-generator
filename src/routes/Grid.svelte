@@ -62,7 +62,7 @@
       y="0"
       width="100%"
       height="100%"
-      fill={$grid.imageBackgroundColor}
+      fill={$grid.imageBackgroundColor || 'transparent'}
       class="grid-image-background-color"
       id="grid-image-background-color"
     />
@@ -76,7 +76,7 @@
     height={tileHeight + $grid.gridlineWidth}
     patternUnits="userSpaceOnUse"
   >
-    <g fill={$grid.gridlineColor}>
+    <g fill={$grid.gridlineColor || 'transparent'}>
       <rect
         x="0"
         y="0"
@@ -111,7 +111,7 @@
           y={getTileY({ rowIndex, tileHeight, gridlineWidth: $grid.gridlineWidth })}
           width={tileWidth}
           height={tileHeight}
-          fill={tile.color}
+          fill={tile.color || 'transparent'}
           class="grid-tile"
           class:is-selected={tile.isSelected}
           data-column-index={columnIndex}
