@@ -76,10 +76,10 @@ export function setGridFromSvg(svgMarkup: string): void {
       gridlineColor,
       columnCount,
       rowCount,
-      tiles: times(rowCount, (r) => {
-        return times(columnCount, (c) => {
-          const x = normalizeRectCoord(getTileX({ columnIndex: c, tileWidth, gridlineWidth }));
-          const y = normalizeRectCoord(getTileY({ rowIndex: r, tileHeight, gridlineWidth }));
+      tiles: times(rowCount, (rowIndex) => {
+        return times(columnCount, (columnIndex) => {
+          const x = normalizeRectCoord(getTileX({ columnIndex, tileWidth, gridlineWidth }));
+          const y = normalizeRectCoord(getTileY({ rowIndex, tileHeight, gridlineWidth }));
           if (rectCoordMap[x]?.[y] !== undefined) {
             return {
               color: rectCoordMap[x][y].getAttribute('fill') || 'transparent'

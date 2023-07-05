@@ -42,10 +42,10 @@ export const regenerateGridTiles = generateGridTiles;
 export function resizeGrid($grid: Grid): Grid {
   return {
     ...$grid,
-    tiles: times($grid.rowCount, (r) => {
-      return times($grid.columnCount, (c) => {
+    tiles: times($grid.rowCount, (rowIndex) => {
+      return times($grid.columnCount, (columnIndex) => {
         return (
-          $grid.tiles?.[r]?.[c] ?? {
+          $grid.tiles?.[rowIndex]?.[columnIndex] ?? {
             color: 'transparent'
           }
         );
@@ -143,9 +143,9 @@ export function getTileY({
   return rowIndex * (tileHeight + gridlineWidth) + gridlineWidth;
 }
 
-export function toggleGridTileSelection(r: number, c: number): void {
+export function toggleGridTileSelection(rowIndex: number, columnIndex: number): void {
   grid.update(($grid) => {
-    $grid.tiles[r][c].isSelected = !$grid.tiles[r][c].isSelected;
+    $grid.tiles[rowIndex][columnIndex].isSelected = !$grid.tiles[rowIndex][columnIndex].isSelected;
     return $grid;
   });
 }

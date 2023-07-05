@@ -21,12 +21,12 @@
 
   function handleSelectTile(event: MouseEvent): void {
     const rect = event.target as SVGRectElement;
-    const r = parseInt(String(rect?.getAttribute('data-row-index')), 10);
-    const c = parseInt(String(rect?.getAttribute('data-column-index')), 10);
-    if (!(r >= 0 && c >= 0)) {
+    const rowIndex = parseInt(String(rect?.getAttribute('data-row-index')), 10);
+    const columnIndex = parseInt(String(rect?.getAttribute('data-column-index')), 10);
+    if (!(rowIndex >= 0 && columnIndex >= 0)) {
       return;
     }
-    toggleGridTileSelection(r, c);
+    toggleGridTileSelection(rowIndex, columnIndex);
     saveGrid();
   }
 
@@ -103,19 +103,19 @@
   />
   <!-- Grid Tiles -->
   <g id="grid-tiles">
-    {#each { length: $grid.rowCount } as _, r}
-      {#each { length: $grid.columnCount } as _, c}
-        {@const tile = $grid.tiles[r][c]}
+    {#each { length: $grid.rowCount } as _, rowIndex}
+      {#each { length: $grid.columnCount } as _, columnIndex}
+        {@const tile = $grid.tiles[rowIndex][columnIndex]}
         <rect
-          x={getTileX({ columnIndex: c, tileWidth, gridlineWidth: $grid.gridlineWidth })}
-          y={getTileY({ rowIndex: r, tileHeight, gridlineWidth: $grid.gridlineWidth })}
+          x={getTileX({ columnIndex, tileWidth, gridlineWidth: $grid.gridlineWidth })}
+          y={getTileY({ rowIndex, tileHeight, gridlineWidth: $grid.gridlineWidth })}
           width={tileWidth}
           height={tileHeight}
           fill={tile.color}
           class="grid-tile"
           class:is-selected={tile.isSelected}
-          data-column-index={c}
-          data-row-index={r}
+          data-column-index={columnIndex}
+          data-row-index={rowIndex}
         />
       {/each}
     {/each}
