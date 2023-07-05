@@ -1,4 +1,13 @@
-import { defaultGrid, grid, saveGrid } from '../stores/Grid';
+import { times } from 'lodash-es';
+import {
+  Grid,
+  getTileHeight,
+  getTileWidth,
+  getTileX,
+  getTileY,
+  grid,
+  saveGrid
+} from '../stores/Grid';
 
 // Update the grid properties by parsing and interpreting the given string of
 // SVG markup
@@ -6,28 +15,41 @@ export function setGridFromSvg(svgMarkup: string): void {
   const parser = new window.DOMParser();
   const svgDocument = parser.parseFromString(svgMarkup, 'text/xml');
   const svgElement = svgDocument.documentElement;
-  const [width, height] =
+  const [imageWidth, imageHeight] =
     svgElement.getAttribute('viewBox')?.split(' ').slice(-2).map(Number) ?? [];
-  if (!width || !height) {
-    console.error('width or height is not defined', width, height);
+  if (!imageWidth || !imageHeight) {
+    console.error('width or height is not defined', imageWidth, imageHeight);
     return;
   }
-  const rects = Array.from(svgElement.querySelectorAll('rect'));
-  const backgroundColor = rects[0].getAttribute('fill') ?? defaultGrid.backgroundColor;
-  const tileColor = svgElement.querySelector('g')?.getAttribute('fill') ?? defaultGrid.tileColor;
-  const columnCount = width / Number(rects[1].getAttribute('width'));
-  const rowCount = height / Number(rects[1].getAttribute('height'));
-  grid.update(($grid) => {
+  const rects = Array.from(svgElement.querySelectorAll('#grid-tiles rect'));
+  const rectsSet = new Set(rects);
+  const imageBackgroundColor =
+    svgElement.querySelector('#grid-image-background-color rect')?.getAttribute('fill') || '';
+  const columnCount = imageWidth / Number(rects[0].getAttribute('width'));
+  const rowCount = imageHeight / Number(rects[0].getAttribute('height'));
+  const gridlineWidth = Number(
+    svgElement.querySelector('#grid-gridline-vertical')?.getAttribute('width')
+  );
+  grid.update(($grid): Grid => {
     return {
       ...$grid,
-      width,
-      height,
-      backgroundColor,
-      tileColor,
+      imageWidth,
+      imageHeight,
+      imageBackgroundColor,
       columnCount,
       rowCount,
-      tiles: rects.slice(1).map((rect) => {
-        return { alpha: Number(rect.getAttribute('opacity')) };
+      tiles: times(rowCount, (r) => {
+        return times(columnCount, (c) => {
+          const tileWidth = getTileWidth({ imageWidth, gridlineWidth, columnCount });
+          const tileHeight = getTileHeight({ imageHeight, gridlineWidth, rowCount });
+          const x = getTileX({ columnIndex: c, tileWidth, gridlineWidth });
+          const y = getTileY({ rowIndex: r, tileHeight, gridlineWidth });
+          // TODO: replace this dummy GridTile object with the logic that maps
+          // tiles in the SVG to tiles in the data structure
+          return {
+            color: 'transparent'
+          };
+        });
       })
     };
   });

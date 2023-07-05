@@ -92,6 +92,53 @@ export function restoreGrid(): Grid {
 
 export const grid = writable(restoreGrid());
 
+export function getTileWidth({
+  imageWidth,
+  gridlineWidth,
+  columnCount
+}: {
+  imageWidth: number;
+  gridlineWidth: number;
+  columnCount: number;
+}): number {
+  return Math.abs(imageWidth - gridlineWidth * columnCount) / columnCount;
+}
+
+export function getTileHeight({
+  imageHeight,
+  gridlineWidth,
+  rowCount
+}: {
+  imageHeight: number;
+  gridlineWidth: number;
+  rowCount: number;
+}): number {
+  return Math.abs(imageHeight - gridlineWidth * rowCount) / rowCount;
+}
+
+export function getTileX({
+  columnIndex,
+  tileWidth,
+  gridlineWidth
+}: {
+  columnIndex: number;
+  tileWidth: number;
+  gridlineWidth: number;
+}): number {
+  return columnIndex * (tileWidth + gridlineWidth) + gridlineWidth;
+}
+export function getTileY({
+  rowIndex,
+  tileHeight,
+  gridlineWidth
+}: {
+  rowIndex: number;
+  tileHeight: number;
+  gridlineWidth: number;
+}): number {
+  return rowIndex * (tileHeight + gridlineWidth) + gridlineWidth;
+}
+
 export function toggleGridTileSelection(r: number, c: number): void {
   grid.update(($grid) => {
     $grid.tiles[r][c].isSelected = !$grid.tiles[r][c].isSelected;

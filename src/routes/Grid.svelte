@@ -1,14 +1,21 @@
 <script lang="ts">
   import { tick } from 'svelte';
-  import { grid, saveGrid, toggleGridTileSelection, type Grid } from '../stores/Grid';
+  import {
+    getTileHeight,
+    getTileWidth,
+    getTileX,
+    getTileY,
+    grid,
+    saveGrid,
+    toggleGridTileSelection,
+    type Grid
+  } from '../stores/Grid';
 
   let tileWidth: number;
   let tileHeight: number;
   function recomputeConstants($grid: Grid): void {
-    tileWidth =
-      Math.abs($grid.imageWidth - $grid.gridlineWidth * $grid.columnCount) / $grid.columnCount;
-    tileHeight =
-      Math.abs($grid.imageHeight - $grid.gridlineWidth * $grid.rowCount) / $grid.rowCount;
+    tileWidth = getTileWidth($grid);
+    tileHeight = getTileHeight($grid);
   }
   $: recomputeConstants($grid);
 
@@ -56,11 +63,12 @@
       height="100%"
       fill={$grid.imageBackgroundColor}
       class="grid-image-background-color"
+      id="grid-image-background-color"
     />
   {/if}
   <!-- Gridlines -->
   <pattern
-    id="gridlines"
+    id="grid-gridlines-pattern"
     x="0"
     y="0"
     width={tileWidth + $grid.gridlineWidth}
@@ -68,28 +76,49 @@
     patternUnits="userSpaceOnUse"
   >
     <g fill={$grid.gridlineColor}>
-      <rect x="0" y="0" width={$grid.gridlineWidth} height={tileHeight + $grid.gridlineWidth} />
-      <rect x={$grid.gridlineWidth} y="0" width={tileWidth} height={$grid.gridlineWidth} />
+      <rect
+        x="0"
+        y="0"
+        width={$grid.gridlineWidth}
+        height={tileHeight + $grid.gridlineWidth}
+        id="grid-gridline-vertical"
+      />
+      <rect
+        x={$grid.gridlineWidth}
+        y="0"
+        width={tileWidth}
+        height={$grid.gridlineWidth}
+        id="grid-gridline-horizontal"
+      />
     </g>
   </pattern>
-  <rect x="0" y="0" width="100%" height="100%" fill="url(#gridlines)" class="grid-gridlines" />
-  <!-- Grid Squares -->
-  {#each { length: $grid.rowCount } as _, r}
-    {#each { length: $grid.columnCount } as _, c}
-      {@const tile = $grid.tiles[r][c]}
-      <rect
-        x={c * (tileWidth + $grid.gridlineWidth) + $grid.gridlineWidth}
-        y={r * (tileHeight + $grid.gridlineWidth) + $grid.gridlineWidth}
-        width={tileWidth}
-        height={tileHeight}
-        fill={tile.color}
-        class="grid-tile"
-        class:is-selected={tile.isSelected}
-        data-column-index={c}
-        data-row-index={r}
-      />
+  <rect
+    x="0"
+    y="0"
+    width="100%"
+    height="100%"
+    fill="url(#grid-gridlines-pattern)"
+    class="grid-gridlines"
+  />
+  <!-- Grid Tiles -->
+  <g id="grid-tiles">
+    {#each { length: $grid.rowCount } as _, r}
+      {#each { length: $grid.columnCount } as _, c}
+        {@const tile = $grid.tiles[r][c]}
+        <rect
+          x={getTileX({ columnIndex: c, tileWidth, gridlineWidth: $grid.gridlineWidth })}
+          y={getTileY({ rowIndex: r, tileHeight, gridlineWidth: $grid.gridlineWidth })}
+          width={tileWidth}
+          height={tileHeight}
+          fill={tile.color}
+          class="grid-tile"
+          class:is-selected={tile.isSelected}
+          data-column-index={c}
+          data-row-index={r}
+        />
+      {/each}
     {/each}
-  {/each}
+  </g>
 </svg>
 
 {#if $grid.fullScreen && svgMarkup}
