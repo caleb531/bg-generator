@@ -11,6 +11,7 @@ export function getSvgMarkup(): string {
   const clonedSvgElement = svgElement.cloneNode(true) as SVGElement;
   clonedSvgElement.removeAttribute('class');
   clonedSvgElement.removeAttribute('style');
+  clonedSvgElement.removeAttribute('role');
   clonedSvgElement.setAttribute('width', String($grid.imageWidth));
   clonedSvgElement.setAttribute('height', String($grid.imageHeight));
   // Process gridlines region and tiles as well
