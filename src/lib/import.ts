@@ -53,9 +53,8 @@ export function setGridFromSvg(svgMarkup: string): void {
   const rects: SVGRectElement[] = Array.from(svgElement.querySelectorAll('#grid-tiles rect'));
   const rectCoordMap = buildCoordMapFromRects(rects);
 
-  const gridlineWidth = Number(
-    svgElement.querySelector('#grid-gridline-vertical')?.getAttribute('width')
-  );
+  const gridlineWidth =
+    Number(svgElement.querySelector('#grid-gridline-vertical')?.getAttribute('width')) || 0;
   const gridlineColor =
     svgElement.querySelector('#grid-gridlines-pattern [fill]')?.getAttribute('fill') ||
     'transparent';

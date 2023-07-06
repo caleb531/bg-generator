@@ -56,51 +56,53 @@
     /* noop for now */
   }}
 >
-  {#if $grid.imageBackgroundColor}
+  {#if $grid.imageBackgroundColor && $grid.imageBackgroundColor !== 'transparent'}
     <rect
       x="0"
       y="0"
       width="100%"
       height="100%"
-      fill={$grid.imageBackgroundColor || 'transparent'}
+      fill={$grid.imageBackgroundColor}
       class="grid-image-background-color"
       id="grid-image-background-color"
     />
   {/if}
   <!-- Gridlines -->
-  <pattern
-    id="grid-gridlines-pattern"
-    x="0"
-    y="0"
-    width={tileWidth + $grid.gridlineWidth}
-    height={tileHeight + $grid.gridlineWidth}
-    patternUnits="userSpaceOnUse"
-  >
-    <g fill={$grid.gridlineColor || 'transparent'}>
-      <rect
-        x="0"
-        y="0"
-        width={$grid.gridlineWidth}
-        height={tileHeight + $grid.gridlineWidth}
-        id="grid-gridline-vertical"
-      />
-      <rect
-        x={$grid.gridlineWidth}
-        y="0"
-        width={tileWidth}
-        height={$grid.gridlineWidth}
-        id="grid-gridline-horizontal"
-      />
-    </g>
-  </pattern>
-  <rect
-    x="0"
-    y="0"
-    width="100%"
-    height="100%"
-    fill="url(#grid-gridlines-pattern)"
-    class="grid-gridlines"
-  />
+  {#if $grid.gridlineWidth && $grid.gridlineColor && $grid.gridlineColor !== 'transparent'}
+    <pattern
+      id="grid-gridlines-pattern"
+      x="0"
+      y="0"
+      width={tileWidth + $grid.gridlineWidth}
+      height={tileHeight + $grid.gridlineWidth}
+      patternUnits="userSpaceOnUse"
+    >
+      <g fill={$grid.gridlineColor}>
+        <rect
+          x="0"
+          y="0"
+          width={$grid.gridlineWidth}
+          height={tileHeight + $grid.gridlineWidth}
+          id="grid-gridline-vertical"
+        />
+        <rect
+          x={$grid.gridlineWidth}
+          y="0"
+          width={tileWidth}
+          height={$grid.gridlineWidth}
+          id="grid-gridline-horizontal"
+        />
+      </g>
+    </pattern>
+    <rect
+      x="0"
+      y="0"
+      width="100%"
+      height="100%"
+      fill="url(#grid-gridlines-pattern)"
+      class="grid-gridlines"
+    />
+  {/if}
   <!-- Grid Tiles -->
   <g id="grid-tiles">
     {#each { length: $grid.rowCount } as _, rowIndex}
