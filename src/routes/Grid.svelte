@@ -56,7 +56,7 @@
     /* noop for now */
   }}
 >
-  {#if $grid.imageBackgroundColor && $grid.imageBackgroundColor !== 'transparent'}
+  {#if $grid.imageBackgroundColor?.trim() && $grid.imageBackgroundColor?.trim() !== 'transparent'}
     <rect
       x="0"
       y="0"
@@ -68,7 +68,7 @@
     />
   {/if}
   <!-- Gridlines -->
-  {#if $grid.gridlineWidth && $grid.gridlineColor && $grid.gridlineColor !== 'transparent'}
+  {#if $grid.gridlineWidth && $grid.gridlineColor?.trim() && $grid.gridlineColor?.trim() !== 'transparent'}
     <pattern
       id="grid-gridlines-pattern"
       x="0"

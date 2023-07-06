@@ -8,8 +8,11 @@
   export let hideLabel = false;
   export let placeholder: string = '';
 
-  let colorSwatchElement: HTMLDivElement;
   let isValid = true;
+
+  function doesColorHaveAlpha(color: string): boolean {
+    return color?.trim() === '' || color === 'transparent' || /a\(/.test(color) || /\//.test(color);
+  }
 
   function validateInputValue(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -32,11 +35,12 @@
     <label for="grid-controls-{id}" class:invisible={hideLabel}>{label}:</label>
     <div class="grid-control-subrow">
       {#if isValid && value}
-        <div
-          class="grid-control-color-swatch"
-          bind:this={colorSwatchElement}
-          style="background-color: {value};"
-        />
+        <div class="grid-control-color-swatch">
+          {#if doesColorHaveAlpha(value)}
+            <div class="grid-control-color-swatch-alpha" />
+          {/if}
+          <div class="grid-control-color-swatch-color" style="background-color: {value}" />
+        </div>
       {/if}
       <input
         id="grid-controls-{id}"

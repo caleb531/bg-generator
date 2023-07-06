@@ -56,13 +56,31 @@
 }
 
 .grid-control-color-swatch {
-  display: inline-block;
+  // Allow child elements to overlap
+  display: inline-grid;
+  grid-template-columns: 1fr;
   --swatch-size: 24px;
   width: var(--swatch-size);
   height: var(--swatch-size);
   margin-right: 10px;
   border: solid 1px var(--color-border);
   border-radius: 50%;
+}
+.grid-control-color-swatch-alpha,
+.grid-control-color-swatch-color {
+  // The color needs to be superimposed atop the checkered alpha background,
+  // which we can accomplish with CSS Grid (rather than a traditional
+  // position:absolute-based approach)
+  grid-row-start: 1;
+  grid-column-start: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+.grid-control-color-swatch-alpha {
+  background-image: url('/alpha.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .selected-tile-colors-form .grid-color-control {
