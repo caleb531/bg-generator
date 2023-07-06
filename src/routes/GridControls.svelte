@@ -71,4 +71,5 @@
     />
     <GridColorControl id="gridline_color" label="Gridlines" bind:value={$grid.gridlineColor} />
   </GridControlGroup>
+  <p class="hint">Click one or more tiles to select them and change their color</p>
 </GridControlForm>

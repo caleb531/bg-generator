@@ -51,6 +51,11 @@ h2 {
   font-weight: 600;
   font-size: 14px;
 }
+.hint {
+  padding: 0 20px;
+  font-style: italic;
+  color: var(--color-hint);
+}
 // Hide some labels from the UI but still be readable by screen readers
 .accessibility-only {
   position: absolute;

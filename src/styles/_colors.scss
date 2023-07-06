@@ -5,6 +5,7 @@
   --color-gray-300: hsl(0, 0%, 18%);
   --color-gray-200: hsl(140, 5%, 25%);
   --color-gray-100: hsl(132, 3%, 38%);
+  --color-gray-50: hsl(132, 3%, 60%);
   --color-white: hsl(0, 0%, 100%);
   --color-border: hsla(0, 0%, 0%, 0.25);
   --color-blue: hsl(220, 95%, 54%);
@@ -17,6 +18,7 @@
   // Semantic color palette
   --color-body: var(--color-gray-600);
   --color-link: var(--color-turquoise);
+  --color-hint: var(--color-gray-50);
   --color-panel: var(--color-gray-300);
   --color-control-group-separator: var(--color-gray-200);
   --color-text: var(--color-white);

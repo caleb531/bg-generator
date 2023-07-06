@@ -1,5 +1,6 @@
 <script lang="ts">
   import { browser } from '$app/environment';
+  import '@fontsource/source-sans-pro/400-italic.css';
   import '@fontsource/source-sans-pro/400.css';
   import '@fontsource/source-sans-pro/600.css';
   import '../styles/index.scss';
