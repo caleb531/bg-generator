@@ -8,19 +8,19 @@
   import GridControlGroup from './GridControlGroup.svelte';
   import GridControlSpacer from './GridControlSpacer.svelte';
   import GridNumberControl from './GridNumberControl.svelte';
-  function toggleFullScreen(): void {
-    $grid.fullScreen = !$grid.fullScreen;
+  function togglePreviewMode(): void {
+    $grid.isPreviewing = !$grid.isPreviewing;
     saveGrid();
   }
 </script>
 
 <GridControlForm>
   <GridControlGroup>
-    <GridActionButton onAction={toggleFullScreen}>
-      {#if $grid.fullScreen}
-        Disable Fullscreen
+    <GridActionButton onAction={togglePreviewMode}>
+      {#if $grid.isPreviewing}
+        Close Preview
       {:else}
-        Enable Fullscreen
+        Preview BG
       {/if}
     </GridActionButton>
     <GridActionButton onAction={exportSvg}>Export SVG</GridActionButton>

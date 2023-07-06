@@ -6,7 +6,7 @@ export interface GridTile {
   color: string; // Supports hex, rgb(), rgba(), hsl(), etc.
 }
 export interface Grid {
-  fullScreen: boolean;
+  isPreviewing: boolean;
   columnCount: number;
   rowCount: number;
   imageWidth: number;
@@ -65,7 +65,7 @@ export function getSelectedGridTiles($grid: Grid): GridTile[] {
 }
 
 export const defaultGrid: Omit<Grid, 'tiles'> = {
-  fullScreen: false,
+  isPreviewing: false,
   columnCount: 20,
   rowCount: 8,
   imageWidth: 200,

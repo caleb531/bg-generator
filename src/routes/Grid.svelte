@@ -33,7 +33,7 @@
   let svgElement: SVGElement;
   let svgMarkup = '';
   async function exportSvgToString($grid: Grid, svgElement: SVGElement): Promise<void> {
-    if (svgElement && $grid.fullScreen) {
+    if (svgElement && $grid.isPreviewing) {
       // Wait for SVG element to finish re-rendering before retrieving outerHTML
       // (source: <https://svelte.dev/tutorial/tick>)
       await tick();
@@ -48,7 +48,7 @@
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 {$grid.imageWidth} {$grid.imageHeight}"
   class="grid-canvas"
-  class:is-fullscreen={$grid.fullScreen}
+  class:is-previewing={$grid.isPreviewing}
   style="background-color: {$grid.canvasBackgroundColor}"
   bind:this={svgElement}
   on:click={handleSelectTile}
@@ -122,9 +122,9 @@
   </g>
 </svg>
 
-{#if $grid.fullScreen && svgMarkup}
+{#if $grid.isPreviewing && svgMarkup}
   <div
-    class="grid-full-screen-image"
+    class="grid-preview-image"
     style:background-size="{$grid.imageWidth}px {$grid.imageHeight}px"
     style:background-image="url('data:image/svg+xml;base64,{window.btoa(svgMarkup)}')"
   />
