@@ -4,6 +4,8 @@
   export let id: string;
   export let label: string;
   export let value: string;
+  export let readonly = false;
+  export let hideLabel = false;
   export let placeholder: string = '';
 
   let colorSwatchElement: HTMLDivElement;
@@ -25,9 +27,9 @@
   }
 </script>
 
-<div class="grid-control">
+<div class="grid-control grid-color-control">
   <div class="grid-control-row">
-    <label for="grid-controls-{id}">{label}:</label>
+    <label for="grid-controls-{id}" class:invisible={hideLabel}>{label}:</label>
     <div class="grid-control-subrow">
       {#if isValid && value}
         <div
@@ -42,6 +44,7 @@
         name={id}
         {value}
         {placeholder}
+        {readonly}
         class:is-invalid={!isValid}
         on:input={validateInputValue}
       />

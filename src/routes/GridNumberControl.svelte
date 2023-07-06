@@ -27,7 +27,7 @@
   }
 </script>
 
-<div class="grid-control">
+<div class="grid-control grid-number-control">
   <div class="grid-control-row">
     <label for="grid-controls-{id}">{label}:</label>
     <input

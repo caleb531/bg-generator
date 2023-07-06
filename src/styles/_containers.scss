@@ -30,3 +30,26 @@ body {
 a {
   color: var(--color-link);
 }
+h1 {
+  margin: 20px 0;
+  padding: 6px 12px;
+  font-weight: 600;
+  font-size: 16px;
+}
+h2 {
+  margin: 0;
+  margin-bottom: 10px;
+  padding: 6px 12px;
+  font-weight: 600;
+  font-size: 14px;
+}
+// Hide some labels from the UI but still be readable by screen readers
+.accessibility-only {
+  position: absolute;
+  top: -1000px;
+  left: -10000px;
+}
+// Make the element invisible
+.invisible {
+  opacity: 0;
+}

@@ -13,6 +13,7 @@
   import GridColorControl from './GridColorControl.svelte';
   import GridControlForm from './GridControlForm.svelte';
   import GridControlGroup from './GridControlGroup.svelte';
+  import SelectedTileColors from './SelectedTileColors.svelte';
 
   let selectedGridTiles: GridTile[] = [];
   // The new color to which to change
@@ -70,3 +71,4 @@
     >
   </GridControlGroup>
 </GridControlForm>
+<SelectedTileColors />

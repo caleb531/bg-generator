@@ -11,6 +11,15 @@ input[type='search'] {
   &.is-invalid {
     background-color: var(--color-input-error);
   }
+  &[readonly] {
+    border-width: 0;
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+    border-bottom: solid 2px var(--color-input-border-readonly);
+    background: none;
+    color: inherit;
+  }
 }
 
 button {
@@ -41,6 +50,10 @@ button {
   }
   &.is-invalid:focus-visible {
     --color-input-focus-shadow: var(--color-input-focus-shadow-invalid);
+  }
+  &[readonly]:focus-visible,
+  &[disabled]:focus-visible {
+    box-shadow: none;
   }
 }
 
