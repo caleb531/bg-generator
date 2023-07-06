@@ -198,6 +198,14 @@ export function setColorForSelectedTiles(color: string): void {
   });
 }
 
+export function getFlatListOfTiles($grid: Grid): GridTile[] {
+  const tiles: GridTile[] = [];
+  forEachTile($grid, (tile) => {
+    tiles.push(tile);
+  });
+  return tiles;
+}
+
 // Persist user's grid data to local browser storage
 export function saveGrid(): void {
   if (typeof localStorage === 'undefined') {

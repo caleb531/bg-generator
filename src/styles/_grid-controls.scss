@@ -86,3 +86,11 @@
 .selected-tile-colors-form .grid-color-control {
   margin-bottom: 10px;
 }
+.selected-tile-color {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0 20px;
+  .grid-color-control {
+    flex-grow: 0;
+  }
+}

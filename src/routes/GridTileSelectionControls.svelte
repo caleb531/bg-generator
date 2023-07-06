@@ -1,6 +1,8 @@
 <script lang="ts">
   import {
     deselectAllTiles,
+    getColorsOfTiles,
+    getFlatListOfTiles,
     getSelectedGridTiles,
     grid,
     saveGrid,
@@ -13,9 +15,10 @@
   import GridColorControl from './GridColorControl.svelte';
   import GridControlForm from './GridControlForm.svelte';
   import GridControlGroup from './GridControlGroup.svelte';
-  import SelectedTileColors from './SelectedTileColors.svelte';
 
   let selectedGridTiles: GridTile[] = [];
+  let selectedColors: string[] = [];
+  let selectedColorsSet: Set<string> = new Set();
   // The new color to which to change
   let pendingNewTileColor: string = '';
 
@@ -40,6 +43,11 @@
   }
 
   $: selectedGridTiles = getSelectedGridTiles($grid);
+  $: selectedColors = getColorsOfTiles(selectedGridTiles);
+  $: selectedColorsSet = new Set(selectedColors);
+  $: otherColors = [...getColorsOfTiles(getFlatListOfTiles($grid))].filter(
+    (color) => !selectedColorsSet.has(color)
+  );
 </script>
 
 <p>Selected Tiles: {selectedGridTiles.length}</p>
@@ -70,5 +78,46 @@
       {selectedGridTiles.length === 1 ? 'Tile' : 'Tiles'}</GridActionButton
     >
   </GridControlGroup>
+  {#if selectedColors.length}
+    <GridControlGroup>
+      <h2>Selected Colors</h2>
+      {#each selectedColors as color, colorIndex}
+        <div class="selected-tile-color">
+          <GridActionButton
+            onAction={() => {
+              pendingNewTileColor = color;
+            }}>Use Color</GridActionButton
+          >
+          <GridColorControl
+            id="selected_color_{colorIndex}"
+            label="Selected Color {colorIndex + 1}"
+            hideLabel={true}
+            bind:value={color}
+            readonly
+          />
+        </div>
+      {/each}
+    </GridControlGroup>
+  {/if}
+  {#if otherColors.length}
+    <GridControlGroup>
+      <h2>Other Available Colors</h2>
+      {#each otherColors as color, colorIndex}
+        <div class="selected-tile-color">
+          <GridActionButton
+            onAction={() => {
+              pendingNewTileColor = color;
+            }}>Use Color</GridActionButton
+          >
+          <GridColorControl
+            id="other_color_{colorIndex}"
+            label="Other Available Color {colorIndex + 1}"
+            hideLabel={true}
+            bind:value={color}
+            readonly
+          />
+        </div>
+      {/each}
+    </GridControlGroup>
+  {/if}
 </GridControlForm>
-<SelectedTileColors />
