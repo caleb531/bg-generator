@@ -14,7 +14,9 @@
 
 {#if browser}
   <AppSidebar />
-  <Grid />
+  <div class="editor-area">
+    <Grid />
+  </div>
 {:else}
   <LoadingIndicator />
 {/if}

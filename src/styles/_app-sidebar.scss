@@ -1,6 +1,7 @@
 .app-sidebar {
   flex-shrink: 0;
   position: relative;
+  z-index: 100;
   width: fit-content;
   width: 320px;
   height: 100%;
