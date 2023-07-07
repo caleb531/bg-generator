@@ -192,7 +192,7 @@ export function getColorsOfTiles(tiles: GridTile[]): string[] {
 export function setColorForSelectedTiles(color: string): void {
   grid.update(($grid) => {
     getSelectedGridTiles($grid).forEach((tile) => {
-      tile.color = color;
+      tile.color = color?.trim() || 'transparent';
     });
     return $grid;
   });
