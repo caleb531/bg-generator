@@ -71,7 +71,7 @@ export const defaultGrid: Omit<Grid, 'tiles'> = {
   imageWidth: 200,
   imageHeight: 80,
   gridlineWidth: 1,
-  gridlineColor: 'rgba(0, 0, 0, 0.1)',
+  gridlineColor: 'rgb(0 0 0 / 0.1)',
   canvasBackgroundColor: '#fff',
   imageBackgroundColor: 'transparent'
 };
