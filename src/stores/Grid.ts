@@ -212,7 +212,7 @@ export function saveGrid(): void {
     return;
   }
   const gridStoreToSave: Grid = get(grid);
-  localStorage.setItem('bg-generator:grid', JSON.stringify(gridStoreToSave));
+  localStorage.setItem('bg-generator-v1:grid', JSON.stringify(gridStoreToSave));
 }
 
 // Watch for changes to individual grid properties
