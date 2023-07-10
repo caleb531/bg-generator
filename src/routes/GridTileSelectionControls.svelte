@@ -33,6 +33,7 @@
 
   function handleSelectTilesWithColor() {
     selectTilesWithColor(selectedGridTiles[0]?.color ?? '');
+    pendingNewTileColor = selectedGridTiles[0]?.color;
   }
 
   function changeColorForSelectedTiles() {
