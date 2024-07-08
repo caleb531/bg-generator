@@ -1,6 +1,6 @@
 # BG Generator
 
-_Copyright 2023, Caleb Evans_  
+_Copyright 2023-2024 Caleb Evans_  
 _Released under the MIT License_
 
 This app was mostly started as an internal tool used to generate a creative
