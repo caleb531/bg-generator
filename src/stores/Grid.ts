@@ -84,7 +84,7 @@ export function restoreGrid(): Grid {
       tiles: generateGridTiles({ ...defaultGrid })
     };
   }
-  const rawValue = localStorage.getItem('bg-generator:grid');
+  const rawValue = localStorage.getItem('bg-generator-v1:grid');
   if (rawValue === null) {
     return { ...defaultGrid, tiles: generateGridTiles({ ...defaultGrid }) };
   }
