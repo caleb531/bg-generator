@@ -10,5 +10,6 @@
     }
   },
   "workbench.editor.labelFormat": "short",
-  "svg.preview.background": "editor"
+  "svg.preview.background": "editor",
+  "eslint.validate": ["svelte"]
 }
