@@ -1,1 +1,1 @@
-<div class="grid-control-spacer" />
+<div class="grid-control-spacer"></div>

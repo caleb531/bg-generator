@@ -1,14 +1,24 @@
 <script lang="ts">
-  export let type: 'submit' | 'button' = 'button';
-  export let severity: string | null = null;
-  export let onAction: (event: MouseEvent) => void;
+  interface Props {
+    type?: 'submit' | 'button';
+    severity?: string | null;
+    onAction: (event: MouseEvent) => void;
+    children?: import('svelte').Snippet;
+  }
+
+  let {
+    type = 'button',
+    severity = null,
+    onAction,
+    children
+  }: Props = $props();
 </script>
 
 <button
   {type}
   class="grid-action-button"
   class:warning={severity === 'warning'}
-  on:click={onAction}
+  onclick={onAction}
 >
-  <slot />
+  {@render children?.()}
 </button>

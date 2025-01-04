@@ -1,12 +1,22 @@
 <script lang="ts">
   import { saveGrid } from '../stores/Grid';
-  export let id: string;
-  export let label: string;
-  export let value: number;
-  export let min: number | undefined = 0;
-  export let max: number | undefined = undefined;
+  interface Props {
+    id: string;
+    label: string;
+    value: number;
+    min?: number | undefined;
+    max?: number | undefined;
+  }
 
-  let isValid = true;
+  let {
+    id,
+    label,
+    value = $bindable(),
+    min = 0,
+    max = undefined
+  }: Props = $props();
+
+  let isValid = $state(true);
 
   function validateInputValue(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -40,7 +50,7 @@
       {max}
       {value}
       class:is-invalid={!isValid}
-      on:input={validateInputValue}
+      oninput={validateInputValue}
     />
   </div>
   <div class="grid-control-row">
@@ -51,7 +61,7 @@
       {min}
       {max}
       {value}
-      on:input={validateInputValue}
+      oninput={validateInputValue}
     />
   </div>
 </div>

@@ -3,8 +3,8 @@
   import GridControls from './GridControls.svelte';
   import GridTileSelectionControls from './GridTileSelectionControls.svelte';
 
-  let selectedGridTiles: GridTile[];
-  $: selectedGridTiles = getSelectedGridTiles($grid);
+  let selectedGridTiles: GridTile[] = $derived(getSelectedGridTiles($grid));
+  
 </script>
 
 <header class="app-sidebar">

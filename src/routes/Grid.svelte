@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import { tick } from 'svelte';
   import {
     getTileHeight,
@@ -11,13 +13,15 @@
     type Grid
   } from '../stores/Grid';
 
-  let tileWidth: number;
-  let tileHeight: number;
+  let tileWidth: number = $state();
+  let tileHeight: number = $state();
   function recomputeConstants($grid: Grid): void {
     tileWidth = getTileWidth($grid);
     tileHeight = getTileHeight($grid);
   }
-  $: recomputeConstants($grid);
+  run(() => {
+    recomputeConstants($grid);
+  });
 
   function handleSelectTile(event: MouseEvent): void {
     const rect = event.target as SVGRectElement;
@@ -30,8 +34,8 @@
     saveGrid();
   }
 
-  let svgElement: SVGElement;
-  let svgMarkup = '';
+  let svgElement: SVGElement = $state();
+  let svgMarkup = $state('');
   async function exportSvgToString($grid: Grid, svgElement: SVGElement): Promise<void> {
     if (svgElement && $grid.isPreviewing) {
       // Wait for SVG element to finish re-rendering before retrieving outerHTML
@@ -40,7 +44,9 @@
       svgMarkup = svgElement.outerHTML;
     }
   }
-  $: exportSvgToString($grid, svgElement);
+  run(() => {
+    exportSvgToString($grid, svgElement);
+  });
 </script>
 
 <svg
@@ -51,8 +57,8 @@
   class:is-previewing={$grid.isPreviewing}
   style="background-color: {$grid.canvasBackgroundColor}"
   bind:this={svgElement}
-  on:click={handleSelectTile}
-  on:keydown={() => {
+  onclick={handleSelectTile}
+  onkeydown={() => {
     /* noop for now */
   }}
 >
@@ -129,5 +135,5 @@
     class="grid-preview-image"
     style:background-size="{$grid.imageWidth}px {$grid.imageHeight}px"
     style:background-image="url('data:image/svg+xml;base64,{window.btoa(svgMarkup)}')"
-  />
+></div>
 {/if}

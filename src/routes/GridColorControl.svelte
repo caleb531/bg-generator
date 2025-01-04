@@ -1,14 +1,25 @@
 <script lang="ts">
   import { saveGrid } from '../stores/Grid';
 
-  export let id: string;
-  export let label: string;
-  export let value: string;
-  export let readonly = false;
-  export let hideLabel = false;
-  export let placeholder: string = '';
+  interface Props {
+    id: string;
+    label: string;
+    value: string;
+    readonly?: boolean;
+    hideLabel?: boolean;
+    placeholder?: string;
+  }
 
-  let isValid = true;
+  let {
+    id,
+    label,
+    value = $bindable(),
+    readonly = false,
+    hideLabel = false,
+    placeholder = ''
+  }: Props = $props();
+
+  let isValid = $state(true);
 
   function doesColorHaveAlpha(color: string): boolean {
     return color?.trim() === '' || color === 'transparent' || /a\(/.test(color) || /\//.test(color);
@@ -37,9 +48,9 @@
       {#if isValid && value}
         <div class="grid-control-color-swatch">
           {#if doesColorHaveAlpha(value)}
-            <div class="grid-control-color-swatch-alpha" />
+            <div class="grid-control-color-swatch-alpha"></div>
           {/if}
-          <div class="grid-control-color-swatch-color" style="background-color: {value}" />
+          <div class="grid-control-color-swatch-color" style="background-color: {value}"></div>
         </div>
       {/if}
       <input
@@ -50,7 +61,7 @@
         {placeholder}
         {readonly}
         class:is-invalid={!isValid}
-        on:input={validateInputValue}
+        oninput={validateInputValue}
       />
     </div>
   </div>

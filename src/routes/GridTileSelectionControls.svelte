@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import {
     deselectAllTiles,
     getColorsOfTiles,
@@ -16,11 +18,11 @@
   import GridControlForm from './GridControlForm.svelte';
   import GridControlGroup from './GridControlGroup.svelte';
 
-  let selectedGridTiles: GridTile[] = [];
-  let selectedColors: string[] = [];
-  let selectedColorsSet: Set<string> = new Set();
+  let selectedGridTiles: GridTile[] = $state([]);
+  let selectedColors: string[] = $state([]);
+  let selectedColorsSet: Set<string> = $state(new Set());
   // The new color to which to change
-  let pendingNewTileColor: string = '';
+  let pendingNewTileColor: string = $state('');
 
   function handleSelectAll() {
     selectAllTiles();
@@ -43,11 +45,19 @@
     setColorForSelectedTiles('transparent');
   }
 
-  $: selectedGridTiles = getSelectedGridTiles($grid);
-  $: selectedColors = getColorsOfTiles(selectedGridTiles);
-  $: selectedColorsSet = new Set(selectedColors);
-  $: otherColors = [...getColorsOfTiles(getFlatListOfTiles($grid))].filter(
-    (color) => !selectedColorsSet.has(color)
+  run(() => {
+    selectedGridTiles = getSelectedGridTiles($grid);
+  });
+  run(() => {
+    selectedColors = getColorsOfTiles(selectedGridTiles);
+  });
+  run(() => {
+    selectedColorsSet = new Set(selectedColors);
+  });
+  let otherColors = $derived(
+    [...getColorsOfTiles(getFlatListOfTiles($grid))].filter(
+      (color) => !selectedColorsSet.has(color)
+    )
   );
 </script>
 
@@ -93,7 +103,7 @@
             id="selected_color_{colorIndex}"
             label="Selected Color {colorIndex + 1}"
             hideLabel={true}
-            bind:value={color}
+            bind:value={selectedColors[colorIndex]}
             readonly
           />
         </div>
@@ -114,7 +124,7 @@
             id="other_color_{colorIndex}"
             label="Other Available Color {colorIndex + 1}"
             hideLabel={true}
-            bind:value={color}
+            bind:value={selectedColors[colorIndex]}
             readonly
           />
         </div>
