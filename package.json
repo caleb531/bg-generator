@@ -35,5 +35,10 @@
   "dependencies": {
     "@fontsource/source-sans-pro": "^5.1.0",
     "lodash-es": "^4.17.21"
+  },
+  "pnpm": {
+    "overrides": {
+      "cookie@<0.7.0": ">=0.7.0"
+    }
   }
 }
