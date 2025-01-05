@@ -1,15 +1,12 @@
 <script lang="ts">
-  import { createBubbler, preventDefault } from 'svelte/legacy';
-
-  const bubble = createBubbler();
+  import type { Snippet } from 'svelte';
   interface Props {
-    children?: import('svelte').Snippet;
-    [key: string]: any
+    children: Snippet;
   }
 
-  let { ...props }: Props = $props();
+  let { children }: Props = $props();
 </script>
 
-<form class="grid-controls" onsubmit={preventDefault(bubble('submit'))} {...props}>
-  {@render props.children?.()}
+<form class="grid-controls" onsubmit={(event) => event.preventDefault()}>
+  {@render children()}
 </form>

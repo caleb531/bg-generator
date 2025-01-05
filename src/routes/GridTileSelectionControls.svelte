@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-
   import {
     deselectAllTiles,
     getColorsOfTiles,
@@ -10,17 +8,13 @@
     saveGrid,
     selectAllTiles,
     selectTilesWithColor,
-    setColorForSelectedTiles,
-    type GridTile
+    setColorForSelectedTiles
   } from '../state/Grid.svelte';
   import GridActionButton from './GridActionButton.svelte';
   import GridColorControl from './GridColorControl.svelte';
   import GridControlForm from './GridControlForm.svelte';
   import GridControlGroup from './GridControlGroup.svelte';
 
-  let selectedGridTiles: GridTile[] = $state([]);
-  let selectedColors: string[] = $state([]);
-  let selectedColorsSet: Set<string> = $state(new Set());
   // The new color to which to change
   let pendingNewTileColor: string = $state('');
 
@@ -45,15 +39,9 @@
     setColorForSelectedTiles('transparent');
   }
 
-  run(() => {
-    selectedGridTiles = getSelectedGridTiles(grid);
-  });
-  run(() => {
-    selectedColors = getColorsOfTiles(selectedGridTiles);
-  });
-  run(() => {
-    selectedColorsSet = new Set(selectedColors);
-  });
+  let selectedGridTiles = $derived(getSelectedGridTiles(grid));
+  let selectedColors = $derived(getColorsOfTiles(selectedGridTiles));
+  let selectedColorsSet = $derived(new Set(selectedColors));
   let otherColors = $derived(
     [...getColorsOfTiles(getFlatListOfTiles(grid))].filter((color) => !selectedColorsSet.has(color))
   );
