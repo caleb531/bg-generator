@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { getSelectedGridTiles, grid, type GridTile } from '../stores/Grid';
+  import { getSelectedGridTiles, grid, type GridTile } from '../state/Grid.svelte';
   import GridControls from './GridControls.svelte';
   import GridTileSelectionControls from './GridTileSelectionControls.svelte';
 
-  let selectedGridTiles: GridTile[] = $derived(getSelectedGridTiles($grid));
-  
+  let selectedGridTiles: GridTile[] = $derived(getSelectedGridTiles(grid));
 </script>
 
 <header class="app-sidebar">

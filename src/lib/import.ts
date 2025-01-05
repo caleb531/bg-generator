@@ -6,9 +6,8 @@ import {
   getTileX,
   getTileY,
   grid,
-  saveGrid,
-  type Grid
-} from '../stores/Grid';
+  saveGrid
+} from '../state/Grid.svelte';
 
 export function getSvgElementFromMarkup(svgMarkup: string): HTMLElement {
   const parser = new window.DOMParser();
@@ -65,30 +64,28 @@ export function setGridFromSvg(svgMarkup: string): void {
   const tileWidth = getTileWidth({ imageWidth, gridlineWidth, columnCount });
   const tileHeight = getTileHeight({ imageHeight, gridlineWidth, rowCount });
 
-  grid.update(($grid): Grid => {
-    return {
-      ...$grid,
-      imageWidth,
-      imageHeight,
-      imageBackgroundColor,
-      gridlineWidth,
-      gridlineColor,
-      columnCount,
-      rowCount,
-      tiles: times(rowCount, (rowIndex) => {
-        return times(columnCount, (columnIndex) => {
-          const x = normalizeRectCoord(getTileX({ columnIndex, tileWidth, gridlineWidth }));
-          const y = normalizeRectCoord(getTileY({ rowIndex, tileHeight, gridlineWidth }));
-          if (rectCoordMap[x]?.[y] !== undefined) {
-            return {
-              color: rectCoordMap[x][y].getAttribute('fill') || 'transparent'
-            };
-          } else {
-            return getDefaultGridTile();
-          }
-        });
-      })
-    };
+  Object.assign(grid, {
+    ...grid,
+    imageWidth,
+    imageHeight,
+    imageBackgroundColor,
+    gridlineWidth,
+    gridlineColor,
+    columnCount,
+    rowCount,
+    tiles: times(rowCount, (rowIndex) => {
+      return times(columnCount, (columnIndex) => {
+        const x = normalizeRectCoord(getTileX({ columnIndex, tileWidth, gridlineWidth }));
+        const y = normalizeRectCoord(getTileY({ rowIndex, tileHeight, gridlineWidth }));
+        if (rectCoordMap[x]?.[y] !== undefined) {
+          return {
+            color: rectCoordMap[x][y].getAttribute('fill') || 'transparent'
+          };
+        } else {
+          return getDefaultGridTile();
+        }
+      });
+    })
   });
   saveGrid();
 }

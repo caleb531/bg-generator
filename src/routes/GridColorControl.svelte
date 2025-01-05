@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { saveGrid } from '../stores/Grid';
+  import { saveGrid } from '../state/Grid.svelte';
 
   interface Props {
     id: string;

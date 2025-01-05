@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { saveGrid } from '../stores/Grid';
+  import { saveGrid } from '../state/Grid.svelte';
   interface Props {
     id: string;
     label: string;
@@ -8,13 +8,7 @@
     max?: number | undefined;
   }
 
-  let {
-    id,
-    label,
-    value = $bindable(),
-    min = 0,
-    max = undefined
-  }: Props = $props();
+  let { id, label, value = $bindable(), min = 0, max = undefined }: Props = $props();
 
   let isValid = $state(true);
 

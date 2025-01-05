@@ -12,7 +12,7 @@
     selectTilesWithColor,
     setColorForSelectedTiles,
     type GridTile
-  } from '../stores/Grid';
+  } from '../state/Grid.svelte';
   import GridActionButton from './GridActionButton.svelte';
   import GridColorControl from './GridColorControl.svelte';
   import GridControlForm from './GridControlForm.svelte';
@@ -46,7 +46,7 @@
   }
 
   run(() => {
-    selectedGridTiles = getSelectedGridTiles($grid);
+    selectedGridTiles = getSelectedGridTiles(grid);
   });
   run(() => {
     selectedColors = getColorsOfTiles(selectedGridTiles);
@@ -55,9 +55,7 @@
     selectedColorsSet = new Set(selectedColors);
   });
   let otherColors = $derived(
-    [...getColorsOfTiles(getFlatListOfTiles($grid))].filter(
-      (color) => !selectedColorsSet.has(color)
-    )
+    [...getColorsOfTiles(getFlatListOfTiles(grid))].filter((color) => !selectedColorsSet.has(color))
   );
 </script>
 

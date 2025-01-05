@@ -1,5 +1,5 @@
 import { times } from 'lodash-es';
-import { derived, get, writable } from 'svelte/store';
+import { untrack } from 'svelte';
 
 export interface GridTile {
   isSelected?: boolean;
@@ -18,8 +18,8 @@ export interface Grid {
   tiles: GridTile[][]; // A two-dimensional array of every tile in the grid; the total number of tiles must be equal to rowCount * columnCount; the rendering optimization mentioned in idea (1) will be responsible for not rendering invisible tiles
 }
 
-export function forEachTile($grid: Grid, callback: (tile: GridTile) => void): void {
-  $grid.tiles.forEach((row) => {
+export function forEachTile(grid: Grid, callback: (tile: GridTile) => void): void {
+  grid.tiles.forEach((row) => {
     row.forEach(callback);
   });
 }
@@ -30,22 +30,22 @@ export function getDefaultGridTile(): GridTile {
   };
 }
 
-export function generateGridTiles($grid: Omit<Grid, 'tiles'>): Grid['tiles'] {
-  return times($grid.rowCount, () => {
-    return times($grid.columnCount, () => {
+export function generateGridTiles(grid: Omit<Grid, 'tiles'>): Grid['tiles'] {
+  return times(grid.rowCount, () => {
+    return times(grid.columnCount, () => {
       return getDefaultGridTile();
     });
   });
 }
 export const regenerateGridTiles = generateGridTiles;
 
-export function resizeGrid($grid: Grid): Grid {
+export function resizeGrid(grid: Grid): Grid {
   return {
-    ...$grid,
-    tiles: times($grid.rowCount, (rowIndex) => {
-      return times($grid.columnCount, (columnIndex) => {
+    ...grid,
+    tiles: times(grid.rowCount, (rowIndex) => {
+      return times(grid.columnCount, (columnIndex) => {
         return (
-          $grid.tiles?.[rowIndex]?.[columnIndex] ?? {
+          grid.tiles?.[rowIndex]?.[columnIndex] ?? {
             color: 'transparent'
           }
         );
@@ -54,9 +54,9 @@ export function resizeGrid($grid: Grid): Grid {
   };
 }
 
-export function getSelectedGridTiles($grid: Grid): GridTile[] {
+export function getSelectedGridTiles(grid: Grid): GridTile[] {
   const selectedTiles: GridTile[] = [];
-  forEachTile($grid, (tile) => {
+  forEachTile(grid, (tile) => {
     if (tile.isSelected) {
       selectedTiles.push(tile);
     }
@@ -76,6 +76,8 @@ export const defaultGrid: Omit<Grid, 'tiles'> = {
   imageBackgroundColor: 'transparent'
 };
 
+export const grid = $state(restoreGrid());
+
 // Retrieve user's persisted grid data from local browser storage
 export function restoreGrid(): Grid {
   if (typeof localStorage === 'undefined') {
@@ -93,8 +95,6 @@ export function restoreGrid(): Grid {
     ...JSON.parse(rawValue)
   };
 }
-
-export const grid = writable(restoreGrid());
 
 export function getTileWidth({
   imageWidth,
@@ -144,38 +144,26 @@ export function getTileY({
 }
 
 export function toggleGridTileSelection(rowIndex: number, columnIndex: number): void {
-  grid.update(($grid) => {
-    $grid.tiles[rowIndex][columnIndex].isSelected = !$grid.tiles[rowIndex][columnIndex].isSelected;
-    return $grid;
-  });
+  grid.tiles[rowIndex][columnIndex].isSelected = !grid.tiles[rowIndex][columnIndex].isSelected;
 }
 
 export function selectAllTiles(): void {
-  grid.update(($grid) => {
-    forEachTile($grid, (tile) => {
-      tile.isSelected = true;
-    });
-    return $grid;
+  forEachTile(grid, (tile) => {
+    tile.isSelected = true;
   });
 }
 
 export function deselectAllTiles(): void {
-  grid.update(($grid) => {
-    forEachTile($grid, (tile) => {
-      tile.isSelected = false;
-    });
-    return $grid;
+  forEachTile(grid, (tile) => {
+    tile.isSelected = false;
   });
 }
 
 export function selectTilesWithColor(color: string): void {
-  grid.update(($grid) => {
-    forEachTile($grid, (tile) => {
-      if (tile.color === color) {
-        tile.isSelected = true;
-      }
-    });
-    return $grid;
+  forEachTile(grid, (tile) => {
+    if (tile.color === color) {
+      tile.isSelected = true;
+    }
   });
 }
 
@@ -190,17 +178,14 @@ export function getColorsOfTiles(tiles: GridTile[]): string[] {
 }
 
 export function setColorForSelectedTiles(color: string): void {
-  grid.update(($grid) => {
-    getSelectedGridTiles($grid).forEach((tile) => {
-      tile.color = color?.trim() || 'transparent';
-    });
-    return $grid;
+  getSelectedGridTiles(grid).forEach((tile) => {
+    tile.color = color?.trim() || 'transparent';
   });
 }
 
-export function getFlatListOfTiles($grid: Grid): GridTile[] {
+export function getFlatListOfTiles(grid: Grid): GridTile[] {
   const tiles: GridTile[] = [];
-  forEachTile($grid, (tile) => {
+  forEachTile(grid, (tile) => {
     tiles.push(tile);
   });
   return tiles;
@@ -211,14 +196,21 @@ export function saveGrid(): void {
   if (typeof localStorage === 'undefined') {
     return;
   }
-  const gridStoreToSave: Grid = get(grid);
-  localStorage.setItem('bg-generator-v1:grid', JSON.stringify(gridStoreToSave));
+  localStorage.setItem('bg-generator-v1:grid', JSON.stringify(grid));
 }
 
 // Watch for changes to individual grid properties
-export const gridColumnCount = derived(grid, ($grid) => $grid.columnCount);
-export const gridRowCount = derived(grid, ($grid) => $grid.rowCount);
-gridColumnCount.subscribe(() => grid.update(resizeGrid));
-gridRowCount.subscribe(() => grid.update(resizeGrid));
+$effect.root(() => {
+  $effect(() => {
+    if (grid.columnCount && grid.rowCount) {
+      Object.assign(
+        grid,
+        // Ensure that no other grid properties are tracked, only columnCount
+        // and rowCount
+        untrack(() => resizeGrid(grid))
+      );
+    }
+  });
+});
 
 saveGrid();

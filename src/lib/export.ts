@@ -1,5 +1,4 @@
-import { get } from 'svelte/store';
-import { grid } from '../stores/Grid';
+import { grid } from '../state/Grid.svelte';
 
 // Retrieve the SVG markup of the current state of the grid as a string
 export function getSvgMarkup(): string {
@@ -7,13 +6,12 @@ export function getSvgMarkup(): string {
   if (!svgElement) {
     return '';
   }
-  const $grid = get(grid);
   const clonedSvgElement = svgElement.cloneNode(true) as SVGElement;
   clonedSvgElement.removeAttribute('class');
   clonedSvgElement.removeAttribute('style');
   clonedSvgElement.removeAttribute('role');
-  clonedSvgElement.setAttribute('width', String($grid.imageWidth));
-  clonedSvgElement.setAttribute('height', String($grid.imageHeight));
+  clonedSvgElement.setAttribute('width', String(grid.imageWidth));
+  clonedSvgElement.setAttribute('height', String(grid.imageHeight));
   // Process gridlines region and tiles as well
   Array.from(clonedSvgElement.querySelectorAll('rect')).forEach((rectElement) => {
     rectElement.removeAttribute('class');
@@ -24,7 +22,7 @@ export function getSvgMarkup(): string {
     const rectFill = rectElement.getAttribute('fill');
     // Remove tiles that blend in with the background of the SVG
     if (
-      (rectFill === 'transparent' || rectFill === $grid.imageBackgroundColor) &&
+      (rectFill === 'transparent' || rectFill === grid.imageBackgroundColor) &&
       rectElement.getAttribute('id') !== 'grid-image-background-color'
     ) {
       rectElement.remove();
