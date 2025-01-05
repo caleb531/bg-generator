@@ -93,7 +93,6 @@ export function setGridFromSvg(svgMarkup: string): void {
 // Upload the file specified by the given ChangeEvent for some file input
 export function uploadFile(event: Event): void {
   const input = event.currentTarget as HTMLInputElement;
-  console.log(input.files);
   if (!input.files?.length) {
     console.log('error uploading file; no file selected');
     return;
