@@ -1,3 +1,5 @@
+@use 'responsive' as *;
+
 .grid-canvas {
   width: fit-content;
   --area-outside-grid-h: 0px;

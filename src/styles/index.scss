@@ -1,9 +1,8 @@
-@import 'responsive';
-@import 'colors';
-@import 'containers';
-@import 'loading-indicator';
-@import 'app-sidebar';
-@import 'form';
-@import 'sliders';
-@import 'grid-controls';
-@import 'grid';
+@use 'colors';
+@use 'containers';
+@use 'loading-indicator';
+@use 'app-sidebar';
+@use 'form';
+@use 'sliders';
+@use 'grid-controls';
+@use 'grid';
