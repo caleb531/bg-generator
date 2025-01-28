@@ -91,7 +91,7 @@
             id="selected_color_{colorIndex}"
             label="Selected Color {colorIndex + 1}"
             hideLabel={true}
-            bind:value={selectedColors[colorIndex]}
+            value={selectedColors[colorIndex]}
             readonly
           />
         </div>
@@ -112,7 +112,7 @@
             id="other_color_{colorIndex}"
             label="Other Available Color {colorIndex + 1}"
             hideLabel={true}
-            bind:value={selectedColors[colorIndex]}
+            value={color}
             readonly
           />
         </div>
