@@ -46,7 +46,9 @@ input,
 button {
   &:focus-visible {
     outline-width: 0;
-    box-shadow: 0 0 0 1px var(--color-border), 0 0 0 3px var(--color-input-focus-shadow);
+    box-shadow:
+      0 0 0 1px var(--color-panel),
+      0 0 0 3px var(--color-input-focus-shadow);
   }
   &.is-invalid:focus-visible {
     --color-input-focus-shadow: var(--color-input-focus-shadow-invalid);
