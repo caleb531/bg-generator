@@ -34,9 +34,11 @@
 
   function changeColorForSelectedTiles() {
     setColorForSelectedTiles(pendingNewTileColor);
+    saveGrid();
   }
   function clearColorForSelectedTiles() {
     setColorForSelectedTiles('transparent');
+    saveGrid();
   }
 
   let selectedGridTiles = $derived(getSelectedGridTiles(grid));
