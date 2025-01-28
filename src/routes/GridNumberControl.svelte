@@ -35,6 +35,7 @@
   <div class="grid-control-row">
     <label for="grid-controls-{id}">{label}:</label>
     <input
+      id="grid-controls-{id}"
       class="grid-control-value"
       type="number"
       inputmode="decimal"
