@@ -1,10 +1,14 @@
+:root {
+  --input-border-radius: 5px;
+}
+
 input[type='text'],
 input[type='number'],
 input[type='search'] {
   border: solid 1px var(--color-input-border);
   background-color: var(--color-input);
   background-clip: padding-box;
-  border-radius: 5px;
+  border-radius: var(--input-border-radius);
   padding: 4px 6px;
   color: var(--color-input-text);
   font-family: inherit;
