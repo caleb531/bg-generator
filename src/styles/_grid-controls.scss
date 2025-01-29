@@ -45,9 +45,13 @@
 }
 
 .grid-control-value {
+  flex-grow: 1;
   margin-left: 4px;
   margin-right: 2px;
   font-size: 16px;
+}
+.grid-control-color-value {
+  font-size: 13.5px;
 }
 
 .grid-control-spacer {
@@ -90,7 +94,5 @@
   display: flex;
   justify-content: flex-end;
   gap: 0 20px;
-  .grid-color-control {
-    flex-grow: 0;
-  }
+  width: 100%;
 }

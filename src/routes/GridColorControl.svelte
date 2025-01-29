@@ -60,6 +60,7 @@
         {value}
         {placeholder}
         {readonly}
+        class="grid-control-value grid-control-color-value"
         class:is-invalid={!isValid}
         oninput={validateInputValue}
       />
