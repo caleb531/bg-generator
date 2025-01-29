@@ -90,7 +90,7 @@
           <GridColorControl
             id="selected_color_{colorIndex}"
             label="Selected Color {colorIndex + 1}"
-            hideLabel={true}
+            hideLabel
             value={selectedColors[colorIndex]}
             readonly
           />
@@ -111,7 +111,7 @@
           <GridColorControl
             id="other_color_{colorIndex}"
             label="Other Available Color {colorIndex + 1}"
-            hideLabel={true}
+            hideLabel
             value={color}
             readonly
           />
