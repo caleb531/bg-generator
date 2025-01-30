@@ -34,8 +34,25 @@
 
   let svgElement: SVGElement | undefined = $state();
   let svgMarkup = $state('');
+
+  // Indicate which grid properties should re-render the preview when changed
+  function getGridExportDependencies(grid: Grid): Array<number | string> {
+    return [
+      grid.imageWidth,
+      grid.imageHeight,
+      grid.canvasBackgroundColor,
+      grid.imageBackgroundColor,
+      grid.gridlineWidth,
+      grid.gridlineColor,
+      grid.rowCount,
+      grid.columnCount
+    ];
+  }
+
   async function exportSvgToString(grid: Grid, svgElement: SVGElement): Promise<void> {
-    if (svgElement && grid.isPreviewing) {
+    // Only export SVG if grid is previewing and one of the specified grid
+    // properties has changed
+    if (svgElement && grid.isPreviewing && getGridExportDependencies(grid)) {
       // Wait for SVG element to finish re-rendering before retrieving outerHTML
       // (source: <https://svelte.dev/tutorial/tick>)
       await tick();
