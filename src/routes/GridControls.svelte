@@ -23,8 +23,8 @@
         Preview BG
       {/if}
     </GridActionButton>
-    <GridActionButton onAction={exportSvg}>Export SVG</GridActionButton>
     <GridActionButton onAction={promptForSvgToImport}>Import SVG</GridActionButton>
+    <GridActionButton onAction={exportSvg}>Export SVG</GridActionButton>
   </GridControlGroup>
   <GridControlGroup>
     <GridNumberControl
