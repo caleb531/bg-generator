@@ -6,7 +6,6 @@
   import '../styles/index.scss';
   import AppSidebar from './AppSidebar.svelte';
   import Grid from './Grid.svelte';
-  import LoadingIndicator from './LoadingIndicator.svelte';
 </script>
 
 <svelte:head>
@@ -18,6 +17,4 @@
   <div class="editor-area">
     <Grid />
   </div>
-{:else}
-  <LoadingIndicator />
 {/if}
