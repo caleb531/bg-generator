@@ -33,7 +33,7 @@
 
 <div class="grid-control grid-number-control">
   <div class="grid-control-row">
-    <label for="grid-controls-{id}">{label}:</label>
+    <label for="grid-controls-{id}">{label}</label>
     <input
       id="grid-controls-{id}"
       class="grid-control-value"

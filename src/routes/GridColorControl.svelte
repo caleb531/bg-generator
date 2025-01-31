@@ -43,7 +43,7 @@
 
 <div class="grid-control grid-color-control">
   <div class="grid-control-row">
-    <label for="grid-controls-{id}" class:accessibility-only={hideLabel}>{label}:</label>
+    <label for="grid-controls-{id}" class:accessibility-only={hideLabel}>{label}</label>
     <div class="grid-control-subrow">
       {#if isValid && value}
         <div class="grid-control-color-swatch">
