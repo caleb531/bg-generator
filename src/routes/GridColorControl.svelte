@@ -8,6 +8,7 @@
     readonly?: boolean;
     hideLabel?: boolean;
     placeholder?: string;
+    description?: string;
   }
 
   let {
@@ -16,7 +17,8 @@
     value = $bindable(),
     readonly = false,
     hideLabel = false,
-    placeholder = ''
+    placeholder = '',
+    description
   }: Props = $props();
 
   let isValid = $state(true);
@@ -43,7 +45,9 @@
 
 <div class="grid-control grid-color-control">
   <div class="grid-control-row">
-    <label for="grid-controls-{id}" class:accessibility-only={hideLabel}>{label}</label>
+    <label for="grid-controls-{id}" title={description} class:accessibility-only={hideLabel}
+      >{label}</label
+    >
     <div class="grid-control-subrow">
       {#if isValid && value}
         <div class="grid-control-color-swatch">

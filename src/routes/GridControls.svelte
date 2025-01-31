@@ -62,10 +62,21 @@
     <GridColorControl
       id="canvas_bg_color"
       label="Canvas BG"
+      description="The background color of the canvas used for editing only; this color will not be part of the exported SVG"
       bind:value={grid.canvasBackgroundColor}
     />
-    <GridColorControl id="image_bg_color" label="Image BG" bind:value={grid.imageBackgroundColor} />
-    <GridColorControl id="gridline_color" label="Gridlines" bind:value={grid.gridlineColor} />
+    <GridColorControl
+      id="image_bg_color"
+      label="Image BG"
+      description="The background color of the exported SVG image"
+      bind:value={grid.imageBackgroundColor}
+    />
+    <GridColorControl
+      id="gridline_color"
+      label="Gridlines"
+      description="The color of the gridlines between each tile in the grid"
+      bind:value={grid.gridlineColor}
+    />
   </GridControlGroup>
   <p class="hint">Click one or more tiles to select them and change their color</p>
 </GridControlForm>
