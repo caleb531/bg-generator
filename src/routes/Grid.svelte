@@ -128,7 +128,9 @@
   {/if}
   <!-- Grid Tiles -->
   <g id="grid-tiles">
+    <!-- eslint-disable-next-line svelte/require-each-key -->
     {#each { length: grid.rowCount } as _, rowIndex}
+      <!-- eslint-disable-next-line svelte/require-each-key -->
       {#each { length: grid.columnCount } as _, columnIndex}
         {@const tile = grid.tiles?.[rowIndex]?.[columnIndex]}
         {#if tile}
