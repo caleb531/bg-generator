@@ -80,7 +80,7 @@
   {#if selectedColors.length}
     <GridControlGroup>
       <h2>Selected Colors</h2>
-      {#each selectedColors as color, colorIndex}
+      {#each selectedColors as color, colorIndex (color)}
         <div class="selected-tile-color">
           <GridActionButton
             onAction={() => {
@@ -101,7 +101,7 @@
   {#if otherColors.length}
     <GridControlGroup>
       <h2>Other Available Colors</h2>
-      {#each otherColors as color, colorIndex}
+      {#each otherColors as color, colorIndex (color)}
         <div class="selected-tile-color">
           <GridActionButton
             onAction={() => {
