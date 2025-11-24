@@ -37,8 +37,10 @@
 .grid-tile:hover {
   stroke: var(--color-grid-tile-selected);
   stroke-width: var(--grid-tile-selection-width-pending);
+  stroke-dasharray: 2;
 }
 .grid-tile.is-selected {
   stroke: var(--color-grid-tile-selected);
   stroke-width: var(--grid-tile-selection-width-committed);
+  stroke-dasharray: 2;
 }
