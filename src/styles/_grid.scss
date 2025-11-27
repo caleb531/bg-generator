@@ -35,11 +35,13 @@
   height: 100%;
 }
 .grid-tile:hover {
+  mix-blend-mode: difference;
   stroke: var(--color-grid-tile-selected);
   stroke-width: var(--grid-tile-selection-width-pending);
   stroke-dasharray: 2;
 }
 .grid-tile.is-selected {
+  mix-blend-mode: difference;
   stroke: var(--color-grid-tile-selected);
   stroke-width: var(--grid-tile-selection-width-committed);
   stroke-dasharray: 2;
