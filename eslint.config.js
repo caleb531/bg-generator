@@ -12,7 +12,7 @@ export default [
   prettier,
   ...svelte.configs['flat/prettier'],
   {
-    files: ['**/*.svelte'],
+    files: ['**/*.ts', '**/*.svelte'],
     languageOptions: {
       parserOptions: {
         parser: ts.parser

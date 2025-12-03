@@ -1,5 +1,6 @@
 import { times } from 'lodash-es';
 import { untrack } from 'svelte';
+import { SvelteSet } from 'svelte/reactivity';
 
 export interface GridTile {
   isSelected?: boolean;
@@ -169,7 +170,7 @@ export function selectTilesWithColor(color: string): void {
 
 export function getColorsOfTiles(tiles: GridTile[]): string[] {
   return Array.from(
-    new Set(
+    new SvelteSet(
       tiles.map((tile) => {
         return tile.color;
       })

@@ -11,5 +11,5 @@
   },
   "workbench.editor.labelFormat": "short",
   "svg.preview.background": "editor",
-  "eslint.validate": ["svelte"]
+  "eslint.validate": ["javascript", "typescript", "svelte"]
 }
