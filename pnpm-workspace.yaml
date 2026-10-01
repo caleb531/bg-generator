@@ -1,0 +1,6 @@
+overrides:
+  cookie@<0.7.0: '>=0.7.0'
+engineStrict: true
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true

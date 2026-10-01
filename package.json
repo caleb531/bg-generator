@@ -35,14 +35,5 @@
   "dependencies": {
     "@fontsource/source-sans-pro": "^5.2.5",
     "lodash-es": "^4.17.23"
-  },
-  "pnpm": {
-    "overrides": {
-      "cookie@<0.7.0": ">=0.7.0"
-    },
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "esbuild"
-    ]
   }
 }
